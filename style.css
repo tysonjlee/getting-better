@@ -1,0 +1,35 @@
+title {
+  display: none;
+}
+
+h1 {
+  text-align: center;
+}
+
+.notes-container {
+  /* Main Flexbox options*/
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-evenly;
+  align-content: center; 
+  align-items: flex-start;  
+  
+  /* Additional options */
+  flex-wrap: wrap; 
+}
+
+.note-card {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-evenly;
+  align-content: space-evenly; 
+  align-items: center;  
+  
+  min-height: 150px; 
+  min-width: 150px; 
+  flex-wrap: wrap; 
+  flex-grow: 1; 
+  
+
+  border: 5px solid black; 
+}

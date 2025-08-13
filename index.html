@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getting Better</title>
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
+    <!--Title-->
+    <h1>Getting Better</h1>
+
     <!--Saved Notes-->
-    <p>Here are your saved notes:</p>
-    <div id="notes-section">
-        
+    <p>Here are your 6 newest notes:</p>
+    <div id="notes-section" class="notes-container">
+      <div class="note-card"></div>
+      <div class="note-card"></div>
+      <div class="note-card"></div>
+      <div class="note-card"></div>
+      <div class="note-card"></div>
+      <div class="note-card"></div>
     </div>
+    <!--TODO: Implement a "show more" feature for more than the 6 newest notes-->
 
     <!--Leave a Note-->
     <div>
@@ -19,7 +28,7 @@
       <textarea id="user-note"></textarea>
       <button type="submit" id="save-button">Save</button>
     </div>
-
+    
     <script src="script.js"></script>
   </body>
 </html>
