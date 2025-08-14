@@ -1,11 +1,3 @@
-title {
-  display: none;
-}
-
-h1 {
-  text-align: center;
-}
-
 .notes-container {
   /* Main Flexbox options*/
   display: flex; 
@@ -16,6 +8,8 @@ h1 {
   
   /* Additional options */
   flex-wrap: wrap; 
+  max-width: 90%; 
+  gap: 20px; 
 }
 
 .note-card {
@@ -26,10 +20,8 @@ h1 {
   align-items: center;  
   
   min-height: 150px; 
-  min-width: 150px; 
+  min-width: 400px; 
   flex-wrap: wrap; 
-  flex-grow: 1; 
-  
-
-  border: 5px solid black; 
+   
+  border: 3px solid black; 
 }
