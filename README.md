@@ -12,3 +12,12 @@ The documentation below is mainly for my personal use :p
 - Save persistence (locally store user's notes)
 - Visual notes
 - Notes manager page 
+
+## v0.3 - MVP (III)
+- Note Manager updates 
+  - Edit a note 
+  - Delete a note 
+  - Create a note  
+- Note time stamps 
+- Recently deleted notes page 
+- Navigation bar
