@@ -7,10 +7,10 @@ window.onload = render;
 // Functions 
 function render() {
   // Show all notes 
-  for (const note of savedNotes) {
+  for (const uniqueId of notesByOrder) {
     const noteCard = document.createElement("div");
     noteCard.classList.add("note-card"); 
-    noteCard.textContent = note; 
+    noteCard.textContent = notesById[uniqueId].content; 
     notesSection.append(noteCard); 
   }
 }

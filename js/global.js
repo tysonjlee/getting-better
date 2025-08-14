@@ -1,5 +1,8 @@
 // Constants & Variables 
-const savedNotes = JSON.parse(localStorage.getItem("notes")) || []; // Parses local storage for saved notes or, if none present, creates an empty array by default 
+const notesById = JSON.parse(localStorage.getItem("notesById")) || {}; // Object of note objects
+// notesById = {"uniqueId1":{"content":contentHere, "timestamp":timestampHere}, ...}
+const notesByOrder = JSON.parse(localStorage.getItem("notesByOrder")) || []; // Array of notes in descending order
+// notesByOrder = ["uniqueId20", "uniqueId19", "uniqueId18", ...]
 
 // Event Listeners 
 
