@@ -11,4 +11,4 @@ The documentation below is mainly for my personal use :p
 ## v0.2 - MVP (II)
 - Save persistence (locally store user's notes)
 - Visual notes
-- Note deletion 
+- Notes manager page 
