@@ -25,9 +25,6 @@ function saveNote() {
   localStorage.setItem("notesById", JSON.stringify(notesById)); 
   localStorage.setItem("notesByOrder", JSON.stringify(notesByOrder)); 
   
-  // FIXME: Delete testing 
-  console.log("Saving the note: " + newNote.value); 
-
   // Updating notes display
   render(); // TODO: Make this more efficient (i.e. If possible, don't call render() and instead show the next card manually)
 }

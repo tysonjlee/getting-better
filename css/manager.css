@@ -1,18 +1,38 @@
-.notes-container {
-  /* Main Flexbox options*/
+.notes-display {
   display: flex; 
   flex-direction: column; 
   justify-content: space-evenly;
   align-content: center; 
   align-items: flex-start;  
   
-  /* Additional options */
   flex-wrap: wrap; 
   max-width: 90%; 
-  gap: 20px; 
+  gap: 15px; 
 }
 
 .note-card {
+  display: flex; 
+  flex-direction: column; 
+  
+
+  border: 3px solid black; 
+}
+
+.note-timestamp {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: flex-start; 
+  align-items: flex-start; 
+  align-content: flex-start; 
+
+  padding-left: 1.5%; 
+  padding-top: 1.5%; 
+
+  /* FIXME: Delete testing */
+  border: 2px solid turquoise; 
+}
+
+.note-content {
   display: flex; 
   flex-direction: row; 
   justify-content: space-evenly;
@@ -22,6 +42,39 @@
   min-height: 150px; 
   min-width: 400px; 
   flex-wrap: wrap; 
-   
-  border: 3px solid black; 
+  padding-left: 10px; 
+  padding-right: 10px; 
+
+  /* FIXME: Delete testing */
+  border: 2px solid red; 
 }
+
+.note-actions {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: flex-end; 
+
+  gap: 10px;
+
+  /* FIXME: Delete testing */
+  border: 2px solid yellow; 
+}
+
+.edit-button {
+  background-image: url(../assets/images/icons/pen.svg); 
+}
+
+.delete-button {
+  background-image: url(../assets/images/icons/trash.svg); 
+}
+
+.icon {
+  border: none;  
+  background-color: transparent; 
+  width: 30px;
+  height: 30px;
+  
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}
+
