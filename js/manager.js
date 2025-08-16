@@ -1,6 +1,5 @@
 // Constants & Variables 
 const notesSection = document.getElementById("notes-section");
-const deleteButton = document.querySelectorAll(".delete-button"); 
 
 // Event Listeners 
 window.onload = render; 
@@ -35,10 +34,12 @@ function render() {
 
     const deleteButton = document.createElement("button"); 
     deleteButton.classList.add("icon", "delete-button");
+    deleteButton.onclick = deleteNote; 
     noteActions.append(deleteButton);
 
     const editButton = document.createElement("button"); 
     editButton.classList.add("icon", "edit-button");
+    editButton.onclick = editNote; 
     noteActions.append(editButton);
 
     // Append final note-card to notesSection
@@ -46,12 +47,17 @@ function render() {
   }
 }
 
-function deleteNote() {
-  
+function deleteNote(uniqueId) {
+  /**
+   * @brief: Deletes a note 
+   * @param uniqueId: The unique id of the note to delete 
+   * @return: nothing 
+   */
+
+
 }
 
 function editNote() {
-
 }
 
 function saveNote() {
