@@ -20,7 +20,7 @@ function render() {
 function saveNote() {
   // Saving to local storage
   const randomId = crypto.randomUUID(); 
-  notesById[randomId] = {"content": newNote.value, "timestamp": Date.now()}; 
+  notesById[randomId] = {"content": newNote.value, "timestampCreated": Date.now()}; 
   notesByOrder.unshift(randomId); 
   localStorage.setItem("notesById", JSON.stringify(notesById)); 
   localStorage.setItem("notesByOrder", JSON.stringify(notesByOrder)); 

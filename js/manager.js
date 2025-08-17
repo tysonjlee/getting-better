@@ -6,20 +6,24 @@ window.onload = render;
 
 // Functions 
 function render() {
-  // Clear before rendering 
+   // Clear before rendering 
   notesSection.innerHTML = ""; 
 
   // Show all notes ascending by time
   for (const uniqueId of notesByOrder) {
+    // FIXME: Delete tesing 
+    console.log("render(): " + uniqueId)
+    
     // Create note-card 
     const noteCard = document.createElement("div");
-    noteCard.classList.add("note-card"); 
+    noteCard.classList.add("note-card");
+    noteCard.id = "note-${uniqueId}";  
 
-    // Add note-timestamp
-    const noteTimestamp = document.createElement("div"); 
-    noteTimestamp.classList.add("note-timestamp"); 
-    noteCard.append(noteTimestamp); 
-    noteTimestamp.textContent = "Created " + convertTimestamp(notesById[uniqueId].timestamp); 
+    // Add note-timestamp-created
+    const noteTimestampCreated = document.createElement("div"); 
+    noteTimestampCreated.classList.add("note-timestamp-created"); 
+    noteCard.append(noteTimestampCreated); 
+    noteTimestampCreated.textContent = "Created " + convertTimestamp(notesById[uniqueId].timestampCreated); 
 
     // Add note-content 
     const noteContent = document.createElement("div");
@@ -34,7 +38,7 @@ function render() {
 
     const deleteButton = document.createElement("button"); 
     deleteButton.classList.add("icon", "delete-button");
-    deleteButton.onclick = deleteNote; 
+    deleteButton.onclick = () => deleteNote(uniqueId); 
     noteActions.append(deleteButton);
 
     const editButton = document.createElement("button"); 
@@ -54,7 +58,14 @@ function deleteNote(uniqueId) {
    * @return: nothing 
    */
 
+  // FIXME: Delete testing 
+  console.log("deleteNote(): " + uniqueId); 
 
+  const cardToDelete = document.getElementById("$note-${uniqueId}"); 
+  if (cardToDelete) { // Safe-check to make sure we got a valid element
+    notesDeletedByOrder.unshift(); 
+    cardToDelete.remove(); 
+  }
 }
 
 function editNote() {
