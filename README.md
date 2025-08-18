@@ -31,5 +31,6 @@ The documentation below is for my personal use :p
   - Delete a note 
   - Create a note  
 - Note time stamps 
-- Recently deleted notes page 
+- Recently deleted notes page
+  - Recover a note 
 - Navigation bar
