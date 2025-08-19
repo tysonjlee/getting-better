@@ -18,7 +18,7 @@
   border: 3px solid black; 
 }
 
-.note-timestamp-created {
+.note-timestamp {
   display: flex; 
   flex-direction: row; 
   justify-content: flex-start; 

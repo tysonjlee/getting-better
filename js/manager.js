@@ -11,19 +11,17 @@ function render() {
 
   // Show all notes ascending by time
   for (const uniqueId of notesByOrder) {
-    // FIXME: Delete tesing 
-    console.log("render(): " + uniqueId)
-    
     // Create note-card 
     const noteCard = document.createElement("div");
     noteCard.classList.add("note-card");
-    noteCard.id = "note-${uniqueId}";  
+    noteCard.id = `note-${uniqueId}`;  
 
-    // Add note-timestamp-created
-    const noteTimestampCreated = document.createElement("div"); 
-    noteTimestampCreated.classList.add("note-timestamp-created"); 
-    noteCard.append(noteTimestampCreated); 
-    noteTimestampCreated.textContent = "Created " + convertTimestamp(notesById[uniqueId].timestampCreated); 
+    // Add note-timestamp
+    const noteTimestamp = document.createElement("div"); 
+    noteTimestamp.classList.add("note-timestamp"); 
+    noteCard.append(noteTimestamp); 
+    if (notesById[uniqueId].wasUpdated) noteTimestamp.textContent = "Edited " + convertTimestamp(notesById[uniqueId].updatedAt); 
+    else noteTimestamp.textContent = "Created " + convertTimestamp(notesById[uniqueId].createdAt);  
 
     // Add note-content 
     const noteContent = document.createElement("div");
@@ -55,33 +53,29 @@ function deleteNote(uniqueId) {
   /**
    * @brief: Deletes a note 
    * @param uniqueId: The unique id of the note to delete 
-   * @return: nothing 
+   * @return: nothing (void)
    */
 
-  // FIXME: Delete testing 
-  console.log("deleteNote(): " + uniqueId); 
-
-  const cardToDelete = document.getElementById("$note-${uniqueId}"); 
+  const cardToDelete = document.getElementById(`note-${uniqueId}`);
   if (cardToDelete) { // Safe-check to make sure we got a valid element
-    notesDeletedByOrder.unshift(); 
-    cardToDelete.remove(); 
+    notesById[uniqueId].isDeleted = true; 
+    notesById[uniqueId].deletedAt = Date.now(); 
+    localStorage.setItem("notesById", JSON.stringify(notesById)); 
+
+    notesByOrder.splice(notesByOrder.indexOf(uniqueId));
+    localStorage.setItem("notesByOrder", JSON.stringify(notesByOrder)); 
+
+    notesDeletedByOrder.unshift(uniqueId);               
+    localStorage.setItem("notesDeletedByOrder", JSON.stringify(notesDeletedByOrder)); 
+    
+    cardToDelete.remove();                               
   }
 }
 
-function editNote() {
+function editNote(uniqueId) {
+
 }
 
 function saveNote() {
 
-}
-
-function convertTimestamp(epochMS) {
-  /**
-   * @brief: Converts time since epoch in MS to a formatted date string to be shown on a note card 
-   * @param epochMS: time since epoch in MS 
-   * @return: the formatted string 
-   */
-
-  const epochDate = new Date(epochMS); 
-  return epochDate.toLocaleString("en-US"); 
 }
