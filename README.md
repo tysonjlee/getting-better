@@ -13,6 +13,30 @@ This project makes use of the following third-party resources. All assets are us
 
 ---
 
+## Tech Stack
+
+### Languages
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
+
+### Styling & UI
+- [Tailwind CSS](https://tailwindcss.com/)
+
+### Tools
+- Node.js & npm 
+- Tailwind CLI 
+- VS Code 
+
+### Version Control
+- Git/GitHub
+
+---
+
+Let me know if you'd like to include build instructions, live preview steps, or a section for future features/goals!
+
+---
+
 ## Documentation
 The documentation below is for my personal use :p
 
