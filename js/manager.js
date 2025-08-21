@@ -62,12 +62,12 @@ function deleteNote(uniqueId) {
     notesById[uniqueId].deletedAt = Date.now(); 
     localStorage.setItem("notesById", JSON.stringify(notesById)); 
 
-    notesByOrder.splice(notesByOrder.indexOf(uniqueId));
+    notesByOrder.splice(notesByOrder.indexOf(uniqueId), 1);
     localStorage.setItem("notesByOrder", JSON.stringify(notesByOrder)); 
 
     notesDeletedByOrder.unshift(uniqueId);               
     localStorage.setItem("notesDeletedByOrder", JSON.stringify(notesDeletedByOrder)); 
-    
+
     cardToDelete.remove();                               
   }
 }

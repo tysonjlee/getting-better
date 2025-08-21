@@ -7,6 +7,7 @@ const notesById = JSON.parse(localStorage.getItem("notesById")) || {}; // Single
  *    "createdAt": int (epoch)
  *    "wasUpdated": boolean
  *    "updatedAt": int (epoch) || null if not updated 
+ *    "lastChangeAt": int (epoch) [greatest of createdAt & updatedAt times]
  *    "isDeleted": boolean
  *    "deletedAt": int (epoch) || null if not deleted
  *   }
