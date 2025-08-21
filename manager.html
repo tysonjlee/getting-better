@@ -8,28 +8,36 @@
     <link rel="stylesheet" href="./css/manager.css">
   </head>
   <body>
-    <!--Title-->
-    <h1>Notes Manager</h1>
+   <!--Navigation Bar-->
+    <nav class="navbar">
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./manager.html">Notes Manager</a></li>
+        <li><a href="./deleted.html">Deleted Notes</a></li>
+      </ul>
+    </nav>
 
-    <!--All Edited/Created Notes-->
-    <p>Here are all of your notes: </p>    
-    <div id = "notes-section" class="notes-display">
-      <!--<div id = "(the card's uniqueId in notesById)" class="note-card">-->
-        <!--<div class="note-timestamp">-->
-        <!--<div class="note-content">-->
-        <!--<div class="note-actions">-->
-          <!--button class="delete-button"-->
-          <!--button class="edit-button"-->
-    </div>
-    
-    <!--TODO: Implement below-->
-    <!--Create a Note-->
+    <!--Main Content-->
+    <main>
+      <!--Title-->
+      <h1>Notes Manager</h1>
 
+      <!--All Edited/Created Notes-->
+      <p>Here are all of your notes: </p>    
+      <div id = "notes-section" class="notes-display">
+        <!--<div id = "(the card's uniqueId in notesById)" class="note-card">-->
+          <!--<div class="note-timestamp">-->
+          <!--<div class="note-content">-->
+          <!--<div class="note-actions">-->
+            <!--button class="delete-button"-->
+            <!--button class="edit-button"-->
+      </div>
+      
+      <!--TODO: Implement below-->
+      <!--Create a Note-->
+    </main>
 
-    <!--FIXME: Delete once done testing-->
-    <a href="./index.html">Home Page</a>
-    <a href="./deleted.html">Deleted Notes</a>
-
+    <!--JS Scripts-->
     <script src ="./js/global.js"></script> 
     <script src ="./js/manager.js"></script> 
   </body>
