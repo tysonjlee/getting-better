@@ -33,11 +33,8 @@ This project makes use of the following third-party resources. All assets are us
 
 ---
 
-Let me know if you'd like to include build instructions, live preview steps, or a section for future features/goals!
-
----
-
 ## Documentation
+
 The documentation below is for my personal use :p
 
 ### v0.1 - MVP (I) 
