@@ -41,7 +41,7 @@ function render() {
 
     const editButton = document.createElement("button"); 
     editButton.classList.add("icon", "edit-button");
-    editButton.onclick = editNote; 
+    editButton.onclick = () => editNote(uniqueId); 
     noteActions.append(editButton);
 
     // Append final note-card to notesSection
@@ -81,8 +81,56 @@ function editNote(uniqueId) {
 
   const cardToEdit = document.getElementById(`note-${uniqueId}`); 
   if (cardToEdit) {
-    
+    const modal = document.getElementById("modal-backdrop");
+    const exitButton = document.getElementById("exit-button");
+    const saveButton = document.getElementById("save-button");
+    const contentArea = document.getElementById("content-area");
+
+    contentArea.textContent = notesById[uniqueId].content; 
+    exitButton.onclick = () => exitEdit(modal); 
+    saveButton.onclick = () => saveEdit(uniqueId, contentArea.textContent); 
+
+    modal.classList.remove("hidden");
   } 
+}
+
+function saveEdit(uniqueId, newContent) {
+  /**
+   * @brief: Saves the edited note
+   * @note: Helper for editNote()
+   * @param newContent: The new, edited string to be used as the note's content
+   * @param uniqueId: The unique id of the edited note to save
+   * @return: nothing (void)
+   */
+
+  // If the content hasn't changed, warn the user 
+  // TODO: Implement this 
+  if (newContent === notesById[uniqueId].content) {
+    console.log("The content is the same!"); 
+    return; 
+  }
+
+  // Save the edited note 
+  const now = Date.now(); 
+  const editedNote = notesById[uniqueId]; 
+  editedNote.content = newContent; 
+  editedNote.wasUpdated = true; 
+  editedNote.updatedAt = now; 
+  editedNote.lastChangeAt = now; 
+
+  // Exit the edit modal
+  exitEdit(); 
+}
+
+function exitEdit(modal) {
+  /**
+   * @brief: Exits the edit modal 
+   * @param modal: The modal object to hide
+   * @return: nothing (void)
+   */
+
+  // Exit the edit modal 
+  modal.classList.add("hidden"); 
 }
 
 function saveNote() {
