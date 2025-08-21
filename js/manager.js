@@ -73,7 +73,16 @@ function deleteNote(uniqueId) {
 }
 
 function editNote(uniqueId) {
+  /**
+   * @brief: Edits a note 
+   * @param uniqueId: The unique id of the note to delete 
+   * @return: nothing (void)
+   */
 
+  const cardToEdit = document.getElementById(`note-${uniqueId}`); 
+  if (cardToEdit) {
+    
+  } 
 }
 
 function saveNote() {
