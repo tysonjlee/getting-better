@@ -43,3 +43,13 @@ main {
 .navbar li{
   float: left;
 }
+
+.icon {
+  border: none;  
+  background-color: transparent; 
+  width: 28px;
+  height: 28px;
+  
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}

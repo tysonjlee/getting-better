@@ -82,11 +82,11 @@ function editNote(uniqueId) {
   const cardToEdit = document.getElementById(`note-${uniqueId}`); 
   if (cardToEdit) {
     const modal = document.getElementById("modal-backdrop");
-    const exitButton = document.getElementById("exit-button");
-    const saveButton = document.getElementById("save-button");
+    const exitButton = document.getElementById("exit-button-id");
+    const saveButton = document.getElementById("save-button-id");
     const contentArea = document.getElementById("content-area");
 
-    contentArea.textContent = notesById[uniqueId].content; 
+    contentArea.value = notesById[uniqueId].content; 
     exitButton.onclick = () => exitEdit(modal); 
     saveButton.onclick = () => saveEdit(uniqueId, contentArea.textContent); 
 
@@ -117,6 +117,7 @@ function saveEdit(uniqueId, newContent) {
   editedNote.wasUpdated = true; 
   editedNote.updatedAt = now; 
   editedNote.lastChangeAt = now; 
+  localStorage.setItem("notesByOrder", JSON.stringify(notesByOrder)); 
 
   // Exit the edit modal
   exitEdit(); 
