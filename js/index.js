@@ -1,8 +1,15 @@
 // Constants & Variables
-const notesSection = document.getElementById("notes-section");
+import {
+  notesById,
+  notesByOrder,
+} from "./global.js";
 const noteCards = document.querySelectorAll("#notes-section .note-card"); 
 const saveButton = document.getElementById("save-button"); 
 const newNote = document.getElementById("user-note"); 
+
+// FIXME: Delete testing once done
+window.notesById = notesById; 
+window.notesByOrder = notesByOrder; 
 
 // Event listeners 
 window.onload = render;

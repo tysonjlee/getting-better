@@ -1,5 +1,17 @@
 // Constants & Variables 
+import {
+  notesById,
+  notesByOrder,
+  notesDeletedByOrder,
+  convertTimestamp
+} from "./global.js";
 const notesSection = document.getElementById("notes-section");
+
+// FIXME: Delete testing once done
+window.notesById = notesById; 
+window.notesByOrder = notesByOrder; 
+window.notesDeletedByOrder = notesDeletedByOrder; 
+window.convertTimestamp = convertTimestamp; 
 
 // Event Listeners 
 window.onload = render; 
@@ -88,18 +100,19 @@ function editNote(uniqueId) {
 
     contentArea.value = notesById[uniqueId].content; 
     exitButton.onclick = () => exitEdit(modal); 
-    saveButton.onclick = () => saveEdit(uniqueId, contentArea.textContent); 
+    saveButton.onclick = () => saveEdit(uniqueId, modal, contentArea.value); 
 
     modal.classList.remove("hidden");
   } 
 }
 
-function saveEdit(uniqueId, newContent) {
+function saveEdit(uniqueId, modal, newContent) {
   /**
    * @brief: Saves the edited note
    * @note: Helper for editNote()
-   * @param newContent: The new, edited string to be used as the note's content
    * @param uniqueId: The unique id of the edited note to save
+   * @param modal: The modal object to hide after saving
+   * @param newContent: The new, edited string to be used as the note's content
    * @return: nothing (void)
    */
 
@@ -112,15 +125,20 @@ function saveEdit(uniqueId, newContent) {
 
   // Save the edited note 
   const now = Date.now(); 
+
   const editedNote = notesById[uniqueId]; 
   editedNote.content = newContent; 
   editedNote.wasUpdated = true; 
   editedNote.updatedAt = now; 
   editedNote.lastChangeAt = now; 
-  localStorage.setItem("notesByOrder", JSON.stringify(notesByOrder)); 
+  localStorage.setItem("notesById", JSON.stringify(notesById)); 
+
+  notesByOrder.splice(notesByOrder.indexOf(uniqueId), 1); 
+  notesByOrder.unshift(uniqueId); 
+  localStorage.setItem("notesByOrder", JSON.stringify(notesByOrder));
 
   // Exit the edit modal
-  exitEdit(); 
+  exitEdit(modal); 
 }
 
 function exitEdit(modal) {
@@ -132,8 +150,5 @@ function exitEdit(modal) {
 
   // Exit the edit modal 
   modal.classList.add("hidden"); 
-}
-
-function saveNote() {
-
+  render(); 
 }

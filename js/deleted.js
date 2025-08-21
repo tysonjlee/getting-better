@@ -1,5 +1,17 @@
-// Constants & Variables 
+// Constants & Variables
+import {
+  notesById,
+  notesByOrder,
+  notesDeletedByOrder,
+  convertTimestamp
+} from "./global.js"; 
 const notesSection = document.getElementById("notes-section");
+
+// FIXME: Delete testing once done
+window.notesById = notesById; 
+window.notesByOrder = notesByOrder; 
+window.notesDeletedByOrder = notesDeletedByOrder; 
+window.convertTimestamp = convertTimestamp; 
 
 // Event Listeners
 window.onload = render; 
