@@ -26,6 +26,7 @@ This project makes use of the following third-party resources. All assets are us
 ### Tools
 - Node.js & npm 
 - Tailwind CLI 
+- ESLint
 - VS Code 
 
 ### Version Control
@@ -38,20 +39,25 @@ This project makes use of the following third-party resources. All assets are us
 The documentation below is for my personal use :p
 
 ### v0.1 - MVP (I) 
-- Display user's saved notes (no save persistence)
-- Save a note 
+- Home page
+  - Display user's saved notes (no save persistence)
+  - Save a note 
 
 ### v0.2 - MVP (II)
+- Home page updates
+  - Visual notes
+- Notes Manager page 
+  - Visual notes
 - Save persistence (locally store user's notes)
-- Visual notes
-- Notes manager page 
 
 ### v0.3 - MVP (III)
-- Note Manager updates 
+- Home Page updates
+  - Remove note creation
+- Notes Manager updates 
+  - Note timestamps
   - Edit a note 
   - Delete a note 
-  - Create a note  
-- Note time stamps 
-- Recently deleted notes page
+- Deleted Notes page
   - Recover a note 
 - Navigation bar
+  - Create a note anywhere via the nav bar 
