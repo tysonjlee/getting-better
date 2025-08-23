@@ -1,23 +1,28 @@
-// Constants & Variables
+// Imports
 import {
   notesById,
   notesByOrder,
   notesDeletedByOrder,
-  convertTimestamp
+  convertTimestamp,
+  render
 } from "./global.js"; 
-const notesSection = document.getElementById("notes-section");
 
-// FIXME: Delete testing once done
-window.notesById = notesById; 
-window.notesByOrder = notesByOrder; 
-window.notesDeletedByOrder = notesDeletedByOrder; 
-window.convertTimestamp = convertTimestamp; 
+import {
+  injectModalTemplate
+} from "./modal.js"
+
+// Constants & Variables
+const notesSection = document.getElementById("notes-section");
+window.currentPage = "deleted"; 
 
 // Event Listeners
-window.onload = render; 
+window.addEventListener("load", async () => {
+  await injectModalTemplate(); 
+  render("deleted"); 
+}); 
 
 // Functions 
-function render() {
+export function renderDeleted() {
    // Clear before rendering 
   notesSection.innerHTML = ""; 
 
@@ -47,7 +52,9 @@ function render() {
 
     const recoverButton = document.createElement("button"); 
     recoverButton.classList.add("icon", "recover-button");
-    recoverButton.onclick = () => recoverNote(uniqueId); 
+    recoverButton.addEventListener("click", () => {
+      recoverNote(uniqueId); 
+    }); 
     noteActions.append(recoverButton);
 
     // Append final note-card to notesSection

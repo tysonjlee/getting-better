@@ -14,7 +14,6 @@
   display: flex; 
   flex-direction: column; 
   
-
   border: 3px solid black; 
 }
 
@@ -27,9 +26,6 @@
 
   padding-left: 1.5%; 
   padding-top: 1.5%; 
-
-  /* FIXME: Delete testing */
-  border: 2px solid turquoise; 
 }
 
 .note-content {
@@ -44,9 +40,6 @@
   flex-wrap: wrap; 
   padding-left: 10px; 
   padding-right: 10px; 
-
-  /* FIXME: Delete testing */
-  border: 2px solid red; 
 }
 
 .note-actions {
@@ -55,9 +48,6 @@
   justify-content: flex-end; 
 
   gap: 10px;
-
-  /* FIXME: Delete testing */
-  border: 2px solid yellow; 
 }
 
 .edit-button {
@@ -66,12 +56,4 @@
 
 .delete-button {
   background-image: url(../assets/images/icons/trash.svg); 
-}
-
-.exit-button {
-  background-image: url(../assets/images/icons/times.svg); 
-}
-
-.save-button {
-  background-image: url(../assets/images/icons/check.svg); 
 }

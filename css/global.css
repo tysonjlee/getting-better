@@ -53,3 +53,11 @@ main {
   background-size: contain; 
   background-repeat: no-repeat; 
 }
+
+.exit-button {
+  background-image: url(../assets/images/icons/times.svg); 
+}
+
+.save-button {
+  background-image: url(../assets/images/icons/check.svg); 
+}

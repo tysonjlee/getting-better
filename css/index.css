@@ -9,7 +9,9 @@
   /* Additional options */
   flex-wrap: wrap; 
   max-width: 90%; 
+  min-height: 300px; 
   gap: 20px; 
+  
 }
 
 .note-card {
