@@ -27,6 +27,7 @@ This project makes use of the following third-party resources. All assets are us
 - Node.js & npm 
 - Tailwind CLI 
 - ESLint
+- HTMLHint
 - VS Code 
 
 ### Version Control
