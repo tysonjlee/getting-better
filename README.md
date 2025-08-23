@@ -62,3 +62,14 @@ The documentation below is for my personal use :p
   - Recover a note 
 - Navigation bar
   - Create a note globally
+
+### v0.4 - MVP (IV)
+- Global styling
+  - Consistent fonts
+  - Color palette 
+  - Normalize spacing (padding, margins, etc.)
+  - Better note cards 
+- Navigation Bar styling
+  - Icons 
+  - Overall polish
+- Modal styling - overall polish
