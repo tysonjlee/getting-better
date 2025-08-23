@@ -60,18 +60,24 @@ function openCreateModal() {
   const modalBackdrop = document.getElementById("modal-backdrop"); 
   modalBackdrop.classList.remove("hidden"); 
 
-  const exitButton = document.getElementById("exit-button-id");  
-  exitButton.addEventListener("click", () => {
+  // Perform button cloning to prevent event listener stacking 
+  const oldExitButton = document.getElementById("exit-button-id"); // Get the old button 
+  const newExitButton = oldExitButton.cloneNode(true); // Clone the old button to get rid of its event listeners
+  oldExitButton.replaceWith(newExitButton); // Replace the old button to prevent duplicates
+  newExitButton.addEventListener("click", () => { // Add event listener to new button
     closeModal(modalBackdrop); 
   }); 
 
   const modalBody = document.getElementById("modal-body"); 
+  modalBody.value = ""; 
 
   const modalTitle = document.getElementById("modal-title");
   modalTitle.innerHTML = "Create a Note"; 
 
-  const saveButton = document.getElementById("save-button-id"); 
-  saveButton.addEventListener("click", () => {
+  const oldSaveButton = document.getElementById("save-button-id");
+  const newSaveButton = oldSaveButton.cloneNode(true); 
+  oldSaveButton.replaceWith(newSaveButton); 
+  newSaveButton.addEventListener("click", () => {
     saveNote(modalBody.value, modalBackdrop); 
   }); 
 }

@@ -13,62 +13,62 @@ import {
 } from "./modal.js"
 
 // Constants & Variables  
-const notesSection = document.getElementById("notes-section");
+const notesContainer = document.getElementById("notes-container-id");
 window.currentPage = "manager"; 
 
 // Event Listeners 
 window.addEventListener("load", async () => {
   await injectModalTemplate(); 
-  render("manager"); 
+  render(window.currentPage); 
 }); 
 
 
 // Functions 
 export function renderManager() {
    // Clear before rendering 
-  notesSection.innerHTML = ""; 
+  notesContainer.innerHTML = ""; 
 
   // Show all notes ascending by time
   for (const uniqueId of notesByOrder) {
     // Create note-card 
     const noteCard = document.createElement("div");
-    noteCard.classList.add("note-card");
+    noteCard.className = "note-card";
     noteCard.id = `note-${uniqueId}`;  
 
     // Add note-timestamp
     const noteTimestamp = document.createElement("div"); 
-    noteTimestamp.classList.add("note-timestamp"); 
+    noteTimestamp.className = "note-timestamp"; 
     noteCard.append(noteTimestamp); 
     if (notesById[uniqueId].wasUpdated) noteTimestamp.textContent = "Edited " + convertTimestamp(notesById[uniqueId].updatedAt); 
     else noteTimestamp.textContent = "Created " + convertTimestamp(notesById[uniqueId].createdAt);  
 
     // Add note-content 
     const noteContent = document.createElement("div");
-    noteContent.classList.add("note-content"); 
+    noteContent.className = "note-content"; 
     noteCard.append(noteContent);
     noteContent.textContent = notesById[uniqueId].content; 
 
     // Add note-icons 
     const noteActions = document.createElement("div"); 
-    noteActions.classList.add("note-actions"); 
+    noteActions.className = "note-actions-row"
     noteCard.append(noteActions);
 
     const deleteButton = document.createElement("button"); 
-    deleteButton.classList.add("icon", "delete-button");
+    deleteButton.className = "icon delete-button"
     deleteButton.addEventListener("click", () => {
       deleteNote(uniqueId); 
     }); 
     noteActions.append(deleteButton);
 
     const editButton = document.createElement("button"); 
-    editButton.classList.add("icon", "edit-button");
+    editButton.className = "icon edit-button"
     editButton.addEventListener("click", () => {
       loadModal("edit", {noteId: uniqueId}, {notesById, notesByOrder, render: () => render("manager")});  
     }); 
     noteActions.append(editButton);
 
-    // Append final note-card to notesSection
-    notesSection.append(noteCard); 
+    // Append final note-card to notesContainer
+    notesContainer.append(noteCard); 
   }
 }
 

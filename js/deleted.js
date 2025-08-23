@@ -12,7 +12,7 @@ import {
 } from "./modal.js"
 
 // Constants & Variables
-const notesSection = document.getElementById("notes-section");
+const notesContainer = document.getElementById("notes-container-id");
 window.currentPage = "deleted"; 
 
 // Event Listeners
@@ -24,7 +24,7 @@ window.addEventListener("load", async () => {
 // Functions 
 export function renderDeleted() {
    // Clear before rendering 
-  notesSection.innerHTML = ""; 
+  notesContainer.innerHTML = ""; 
 
   // Show all notes ascending by time
   for (const uniqueId of notesDeletedByOrder) {
@@ -47,7 +47,7 @@ export function renderDeleted() {
 
     // Add note-icons 
     const noteActions = document.createElement("div"); 
-    noteActions.classList.add("note-actions"); 
+    noteActions.classList.add("note-actions-row"); 
     noteCard.append(noteActions);
 
     const recoverButton = document.createElement("button"); 
@@ -57,8 +57,8 @@ export function renderDeleted() {
     }); 
     noteActions.append(recoverButton);
 
-    // Append final note-card to notesSection
-    notesSection.append(noteCard); 
+    // Append final note-card to notesContainer
+    notesContainer.append(noteCard); 
   }
 }
 

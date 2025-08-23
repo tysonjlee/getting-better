@@ -20,9 +20,23 @@ window.addEventListener("load", async () => {
 
 // Functions
 export function renderHome() {
-  // Show notes 
-  const noteCards = document.querySelectorAll("#notes-section .note-card"); 
-  for (let i = 0; i < 6 && i + 1 <= notesByOrder.length; ++i) {
-    noteCards[i].textContent = notesById[notesByOrder[i]].content;
+  /**
+   * @brief: Renders the home page 
+   * @return: nothing (void)
+   */
+
+  // Clear the notes container
+  const notesContainer = document.getElementById("notes-container-id"); 
+  notesContainer.innerHTML = ""; 
+
+  // Show 4 most recent notes
+  for (let i = 0; i < 4 && i + 1 <= notesByOrder.length; ++i) {
+    const noteCard = document.createElement("div"); 
+    noteCard.className = "note-card"; 
+    const noteContent = document.createElement("div"); 
+    noteContent.className = "note-content";
+    noteContent.textContent = notesById[notesByOrder[i]].content; 
+    noteCard.append(noteContent); 
+    notesContainer.append(noteCard); 
   }
 }

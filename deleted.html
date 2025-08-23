@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deleted Notes | Getting Better</title>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./css/output.css">
     <link rel="stylesheet" href="./css/deleted.css">
   </head>
   <body>
     <!--Navigation Bar-->
     <nav class="navbar">
-      <ul>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./manager.html">Notes Manager</a></li>
-        <li><a href="./deleted.html">Deleted Notes</a></li>
-        <li><button id="create-note-button">Create a Note</button></li> <!--TODO: Implement-->
-      </ul>
+      <div class="block space-x-4">
+        <a href="./index.html" class="text-xl hover:underline text-gray-50 inter-semibold">Home</a>
+        <a href="./manager.html" class="text-xl hover:underline text-gray-50 inter-semibold">Notes Manager</a>
+        <a href="./deleted.html" class="text-xl hover:underline text-gray-50 inter-semibold">Deleted Notes</a>
+        <button id="create-note-button" class="text-xl hover:underline text-gray-50 inter-semibold">Create a Note</button> <!--TODO: Implement-->
+      </div>
     </nav>
 
     <!--Main Content-->
-    <main>
+    <main class="px-8 py-4 mx-auto">
       <!--Title-->
-      <h1>Deleted Notes</h1>
+      <h1 class="title">Deleted Notes</h1>
 
       <!--All Deleted Notes-->
-      <div id="notes-section" class="notes-display">
+      <div id="notes-container-id" class="notes-container">
         <!--<div id = "(the card's uniqueId in notesById)" class="note-card">-->
           <!--<div class="note-timestamp">-->
           <!--<div class="note-content">-->
