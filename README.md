@@ -21,7 +21,7 @@ This project makes use of the following third-party resources. All assets are us
 - JavaScript (Vanilla)
 
 ### Styling & UI
-- [Tailwind CSS](https://tailwindcss.com/)
+- Tailwind CSS
 
 ### Tools
 - Node.js & npm 
@@ -60,4 +60,4 @@ The documentation below is for my personal use :p
 - Deleted Notes page
   - Recover a note 
 - Navigation bar
-  - Create a note anywhere via the nav bar 
+  - Create a note globally
