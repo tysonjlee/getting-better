@@ -9,7 +9,10 @@ Getting Better is a simple note-taking web app focused on mental health self-ref
 This project makes use of the following third-party resources. All assets are used in compliance with their respective licenses.
 
 ### Images, Graphics, & Icons
-- Line Awesome (https://icons8.com/line-awesome)
+- [Line Awesome](https://icons8.com/line-awesome)
+
+### Fonts
+- [Google Fonts](https://fonts.google.com/)
 
 ---
 
