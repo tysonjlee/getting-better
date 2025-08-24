@@ -4,17 +4,22 @@ import {
   notesByOrder,
   render
 } from "./global.js";
-
 import {
-  injectModalTemplate
+  injectModalTemplate,
+  setupModalListeners
 } from "./modal.js"
+import {
+  injectNavBarTemplate
+} from "./navbar.js"
 
 // Constants & Variables
 window.currentPage = "home"; 
 
 // Event listeners 
 window.addEventListener("load", async () => {
+  await injectNavBarTemplate(); 
   await injectModalTemplate(); 
+  setupModalListeners(); 
   render("home"); 
 });
 

@@ -6,11 +6,13 @@ import {
   convertTimestamp, 
   render
 } from "./global.js";
-
 import {
   injectModalTemplate,
   loadModal
 } from "./modal.js"
+import {
+  injectNavBarTemplate
+} from "./navbar.js"
 
 // Constants & Variables  
 const notesContainer = document.getElementById("notes-container-id");
@@ -18,6 +20,7 @@ window.currentPage = "manager";
 
 // Event Listeners 
 window.addEventListener("load", async () => {
+  await injectNavBarTemplate(); 
   await injectModalTemplate(); 
   render(window.currentPage); 
 }); 

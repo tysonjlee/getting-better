@@ -28,7 +28,6 @@ window.notesDeletedByOrder = notesDeletedByOrder;
 
 // Event Listeners 
 
-
 // Functions 
 export async function render(page) {
   /**

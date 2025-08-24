@@ -14,16 +14,9 @@
     <link rel="stylesheet" href="./css/manager.css">
   </head>
   <body>
-    <!--Navigation Bar-->
-    <nav class="navbar">
-      <div class="block space-x-4">
-        <a href="./index.html" class="text-xl hover:underline text-gray-50 inter-semibold">Home</a>
-        <a href="./manager.html" class="text-xl hover:underline text-gray-50 inter-semibold">Notes Manager</a>
-        <a href="./deleted.html" class="text-xl hover:underline text-gray-50 inter-semibold">Deleted Notes</a>
-        <button id="create-note-button" class="text-xl hover:underline text-gray-50 inter-semibold">Create a Note</button> <!--TODO: Implement-->
-      </div>
-    </nav>
-
+    <!--Navigation Bar (Injected through JS)-->
+    <!--Modal Backdrop (Injected through JS)-->
+    
     <!--Main Content-->
     <main class="px-8 py-4 mx-auto">
       <!--Title-->
@@ -43,7 +36,8 @@
     </main>
 
 
-    <!--JS Modules-->
+    <!--JS Scripts/Modules-->
     <script type="module" src="./js/manager.js"></script> 
+    <script src="./node_modules/preline/dist/preline.js"></script>
   </body>
 </html>

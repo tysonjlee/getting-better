@@ -6,10 +6,12 @@ import {
   convertTimestamp,
   render
 } from "./global.js"; 
-
 import {
   injectModalTemplate
 } from "./modal.js"
+import {
+  injectNavBarTemplate
+} from "./navbar.js"
 
 // Constants & Variables
 const notesContainer = document.getElementById("notes-container-id");
@@ -17,6 +19,7 @@ window.currentPage = "deleted";
 
 // Event Listeners
 window.addEventListener("load", async () => {
+  await injectNavBarTemplate(); 
   await injectModalTemplate(); 
   render("deleted"); 
 }); 

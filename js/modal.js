@@ -1,20 +1,31 @@
 /** @note: Make sure each js file imports from this modal file! */
 
 // Constants & Variables
-const createNoteButton = document.getElementById("create-note-button"); 
 
 // Event Listeners
-createNoteButton.addEventListener("click", () => {
-  loadModal("create", {}); 
-}); 
 
 // Functions 
 export async function injectModalTemplate() {
-  const result = await fetch("../modal.html"); 
+  const result = await fetch("../modal.tpl"); 
   const text = await result.text(); 
   const template = document.createElement("template"); 
   template.innerHTML = text.trim(); 
   document.body.appendChild(template.content.firstElementChild); 
+}
+
+export function setupModalListeners() {
+  /**
+   * @brief: Sets any modal event listeners up that require ALL DOM content to be loaded 
+   * @return: none (void)
+   */
+
+  // Create button
+  const createNoteButton = document.getElementById("create-note-button"); 
+  if (createNoteButton) {
+    createNoteButton.addEventListener("click", () => {
+      loadModal("create", {}); 
+    }); 
+  } else console.log("ERROR ERROR ERROR"); 
 }
 
 export function loadModal(type, options = {}) {
