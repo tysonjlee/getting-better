@@ -1,10 +1,12 @@
 {
   "type": "module",
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.12"
+    "@tailwindcss/cli": "^4.1.12",
+    "preline": "^3.2.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@tailwindcss/forms": "^0.5.10",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.33.0",
     "globals": "^16.3.0",
