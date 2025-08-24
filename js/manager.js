@@ -8,6 +8,7 @@ import {
 } from "./global.js";
 import {
   injectModalTemplate,
+  setupModalListeners,
   loadModal
 } from "./modal.js"
 import {
@@ -22,6 +23,7 @@ window.currentPage = "manager";
 window.addEventListener("load", async () => {
   await injectNavBarTemplate(); 
   await injectModalTemplate(); 
+  setupModalListeners(); 
   render(window.currentPage); 
 }); 
 

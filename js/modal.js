@@ -6,11 +6,16 @@
 
 // Functions 
 export async function injectModalTemplate() {
+  // Get the HTML template
   const result = await fetch("../modal.tpl"); 
   const text = await result.text(); 
   const template = document.createElement("template"); 
   template.innerHTML = text.trim(); 
-  document.body.appendChild(template.content.firstElementChild); 
+
+  // Append before the JS scripts
+  const scripts = document.querySelectorAll("script"); 
+  const firstScript = scripts[0]; 
+  document.body.insertBefore(template.content.firstElementChild, firstScript); 
 }
 
 export function setupModalListeners() {
@@ -25,7 +30,7 @@ export function setupModalListeners() {
     createNoteButton.addEventListener("click", () => {
       loadModal("create", {}); 
     }); 
-  } else console.log("ERROR ERROR ERROR"); 
+  } 
 }
 
 export function loadModal(type, options = {}) {

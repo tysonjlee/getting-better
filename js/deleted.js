@@ -7,7 +7,8 @@ import {
   render
 } from "./global.js"; 
 import {
-  injectModalTemplate
+  injectModalTemplate, 
+  setupModalListeners
 } from "./modal.js"
 import {
   injectNavBarTemplate
@@ -21,6 +22,7 @@ window.currentPage = "deleted";
 window.addEventListener("load", async () => {
   await injectNavBarTemplate(); 
   await injectModalTemplate(); 
+  setupModalListeners(); 
   render("deleted"); 
 }); 
 
