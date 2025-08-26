@@ -70,9 +70,6 @@ The documentation below is for my personal use :p
 - Global styling
   - Consistent fonts
   - Color palette 
-  - Normalize spacing (padding, margins, etc.)
-  - Better note cards 
+  - Note cards styling
 - Navigation Bar styling
-  - Icons 
   - Overall polish
-- Modal styling - overall polish
