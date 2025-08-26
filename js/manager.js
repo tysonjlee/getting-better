@@ -4,6 +4,7 @@ import {
   notesByOrder,
   notesDeletedByOrder,
   convertTimestamp, 
+  createButtonSVG,
   render
 } from "./global.js";
 import {
@@ -53,20 +54,24 @@ export function renderManager() {
     noteCard.append(noteContent);
     noteContent.textContent = notesById[uniqueId].content; 
 
-    // Add note-icons 
+    // Add note actions
     const noteActions = document.createElement("div"); 
     noteActions.className = "note-actions-row"
     noteCard.append(noteActions);
 
     const deleteButton = document.createElement("button"); 
-    deleteButton.className = "icon delete-button"
+    deleteButton.className = "icon"; 
+    const deleteSVG = createButtonSVG("delete"); 
+    deleteButton.append(deleteSVG); 
     deleteButton.addEventListener("click", () => {
       deleteNote(uniqueId); 
     }); 
     noteActions.append(deleteButton);
 
     const editButton = document.createElement("button"); 
-    editButton.className = "icon edit-button"
+    editButton.className = "icon"; 
+    const editSVG = createButtonSVG("edit"); 
+    editButton.append(editSVG); 
     editButton.addEventListener("click", () => {
       loadModal("edit", {noteId: uniqueId}, {notesById, notesByOrder, render: () => render("manager")});  
     }); 

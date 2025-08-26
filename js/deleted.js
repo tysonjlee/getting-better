@@ -4,6 +4,7 @@ import {
   notesByOrder,
   notesDeletedByOrder,
   convertTimestamp,
+  createButtonSVG,
   render
 } from "./global.js"; 
 import {
@@ -56,7 +57,9 @@ export function renderDeleted() {
     noteCard.append(noteActions);
 
     const recoverButton = document.createElement("button"); 
-    recoverButton.classList.add("icon", "recover-button");
+    recoverButton.className = "icon"; 
+    const recoverSVG = createButtonSVG("recover"); 
+    recoverButton.append(recoverSVG); 
     recoverButton.addEventListener("click", () => {
       recoverNote(uniqueId); 
     }); 
