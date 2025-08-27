@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev": "tailwindcss -i ./css/global.css -o ./css/output.css --watch"
+  },
   "type": "module",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.12",
