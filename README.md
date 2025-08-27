@@ -73,3 +73,25 @@ The documentation below is for my personal use :p
   - Note cards styling
 - Navigation Bar styling
   - Overall polish
+
+### v0.5 - MVP (V)
+- User Accounts 
+  - User Profile page 
+    - User settings page 
+  - Navbar update 
+  - Store info (notes, user data, etc.) on backend 
+- Pinned Notes - pin a note to your dashboard 
+- Search Query - search for relative notes by keywords or note content (AI implementation)
+- Organization refactor - remove Deleted Notes page & centralize into Notes Manager page
+  - Automatically show all created & edited notes 
+  - Notes sorting/filtering
+    - Filtering: 
+      - By status
+        - Show all notes 
+        - Unedited notes 
+        - Edited notes 
+        - Deleted notes
+        - Only pinned notes
+      - By tags (see noteTags in global.js)
+    - Sorting: 
+      - By time 
