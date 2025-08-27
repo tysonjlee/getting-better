@@ -1,4 +1,4 @@
-/** @note: Make sure each js file imports from this global file! */
+/** @note Make sure each js file imports from this global file! */
 
 // Constants & Variables 
 export const notesById = JSON.parse(localStorage.getItem("notesById")) || {}; // Single truth source 
@@ -13,6 +13,7 @@ window.notesById = notesById;
  *    "lastChangeAt": int (epoch) [greatest of createdAt & updatedAt times]
  *    "isDeleted": boolean
  *    "deletedAt": int (epoch) || null if not deleted
+ *    "pinned": boolean
  *   }
  *   ...
  * }
@@ -21,6 +22,9 @@ window.notesById = notesById;
 export const notesByOrder = JSON.parse(localStorage.getItem("notesByOrder")) || []; // Array of note ID's descending by timestamp created/edited
 window.notesByOrder = notesByOrder; 
 // notesByOrder = ["uniqueId20", "uniqueId19", "uniqueId18", ...]
+
+export const notesPinnedByOrder = JSON.parse(localStorage.getItem("notesPinnedByOrder")) || []; // Array of pinned note ID's descending by timestamp pinned
+window.notesPinnedByOrder = notesPinnedByOrder; 
 
 export const notesDeletedByOrder = JSON.parse(localStorage.getItem("notesDeletedByOrder")) || []; // Array of deleted note ID's descending by timestamp deleted
 window.notesDeletedByOrder = notesDeletedByOrder; 
@@ -31,9 +35,9 @@ window.notesDeletedByOrder = notesDeletedByOrder;
 // Functions 
 export async function render(page) {
   /**
-   * @brief: Renders the specified page 
-   * @param page: The specific page to render
-   * @return: nothing (void)
+   * @brief Renders the specified page 
+   * @param page The specific page to render
+   * @return nothing (void)
    */
   
   if (page === "home"){
@@ -49,37 +53,26 @@ export async function render(page) {
 }
 window.render = render; 
 
-export function convertTimestamp(epochMS) {
-  /**
-   * @brief: Converts time since epoch in MS to a formatted date string to be shown on a note card 
-   * @note: formatted as month/day/full_year, x:xx:xx AM/PM
-   * @param epochMS: time since epoch in MS 
-   * @return: the formatted string 
-   */
-
-  const epochDate = new Date(epochMS); 
-  return epochDate.toLocaleString("en-US"); 
-}
-window.convertTimestamp = convertTimestamp; 
-
-export function createButtonSVG(button) {
+export function createSVG(type) {
   /** 
-   * @brief: Dynamically creates an editSVG element for the specified button
-   * @note: Doing this to allow for coloring of the editSVG via Tailwind
-   * @param button: The button name 
-   * @return: The final editSVG element
+   * @brief Dynamically creates an SVG element of the specified type
+   * @note Doing this to allow for coloring of the editSVG via Tailwind
+   * @param type The type of SVG (see below)
+   * @return The final SVG element
    */
 
-  if (button === "edit") return createEditSVG(); 
-  else if (button === "delete") return createDeleteSVG();
-  else if (button === "recover") return createRecoverSVG(); 
+  if (type === "edit") return createEditSVG(); 
+  else if (type === "delete") return createDeleteSVG();
+  else if (type === "recover") return createRecoverSVG(); 
+  else if (type === "pin-button") return createPinButtonSVG(); 
+  else if (type === "pin-status") return createPinStatusSVG(); 
 }
 
 function createEditSVG() {
   /**
    * @briefs: Creates the correct SVG element for the edit button
-   * @note: Helper for createButtonSVG()
-   * @return: The final SVG element 
+   * @note Helper for createSVG()
+   * @return The final SVG element 
    */
 
   // Create & set the edit button 
@@ -101,8 +94,8 @@ function createEditSVG() {
 function createDeleteSVG() {
   /**
    * @briefs: Creates the correct SVG element for the delete button
-   * @note: Helper for createButtonSVG()
-   * @return: The final SVG element 
+   * @note Helper for createSVG()
+   * @return The final SVG element 
    */
 
   // Create & set the delete button 
@@ -124,8 +117,8 @@ function createDeleteSVG() {
 function createRecoverSVG() {
   /**
    * @briefs: Creates the correct SVG element for the recover button
-   * @note: Helper for createButtonSVG()
-   * @return: The final SVG element 
+   * @note Helper for createSVG()
+   * @return The final SVG element 
    */
 
   // Create & set the recover button 
@@ -143,3 +136,62 @@ function createRecoverSVG() {
   // Return the final SVG
   return recoverSVG;
 }
+
+function createPinButtonSVG() {
+  /**
+   * @briefs: Creates the correct SVG element for the pin button
+   * @note Helper for createSVG()
+   * @return The final SVG element 
+   */
+
+  // Create & set the pin button 
+  const pinSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  pinSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  pinSVG.setAttribute("viewBox", "0 0 32 32");
+  pinSVG.setAttribute("fill", "currentColor");
+  pinSVG.setAttribute("class", "w-6 h-6 text-midnight-text");
+
+  // Create the SVG's path
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", "M 20.53125 2.5625 L 19.84375 3.5 L 14.9375 10.1875 C 12.308594 9.730469 9.527344 10.472656 7.5 12.5 L 6.78125 13.1875 L 12.09375 18.5 L 4 26.59375 L 4 28 L 5.40625 28 L 13.5 19.90625 L 18.8125 25.21875 L 19.5 24.5 C 21.527344 22.472656 22.269531 19.691406 21.8125 17.0625 L 28.5 12.15625 L 29.4375 11.46875 Z M 20.78125 5.625 L 26.375 11.21875 L 20.15625 15.78125 L 19.59375 16.1875 L 19.78125 16.84375 C 20.261719 18.675781 19.738281 20.585938 18.59375 22.1875 L 9.8125 13.40625 C 11.414063 12.261719 13.324219 11.738281 15.15625 12.21875 L 15.8125 12.40625 L 16.21875 11.84375 Z");
+  pinSVG.appendChild(path);
+
+  // Return the final SVG
+  return pinSVG;
+}
+
+function createPinStatusSVG() {
+  /**
+   * @briefs: Creates the correct SVG element for the pin status
+   * @note Helper for createSVG()
+   * @return The final SVG element 
+   */
+
+  // Create & set the pin status icon
+  const pinSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  pinSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  pinSVG.setAttribute("viewBox", "0 0 32 32");
+  pinSVG.setAttribute("fill", "currentColor");
+  pinSVG.setAttribute("class", "pr-1 pt-1 w-6 h-6 text-red-600");
+
+  // Create the SVG's path
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", "M 20.53125 2.5625 L 19.84375 3.5 L 14.9375 10.1875 C 12.308594 9.730469 9.527344 10.472656 7.5 12.5 L 6.78125 13.1875 L 12.09375 18.5 L 4 26.59375 L 4 28 L 5.40625 28 L 13.5 19.90625 L 18.8125 25.21875 L 19.5 24.5 C 21.527344 22.472656 22.269531 19.691406 21.8125 17.0625 L 28.5 12.15625 L 29.4375 11.46875 Z M 20.78125 5.625 L 26.375 11.21875 L 20.15625 15.78125 L 19.59375 16.1875 L 19.78125 16.84375 C 20.261719 18.675781 19.738281 20.585938 18.59375 22.1875 L 9.8125 13.40625 C 11.414063 12.261719 13.324219 11.738281 15.15625 12.21875 L 15.8125 12.40625 L 16.21875 11.84375 Z");
+  pinSVG.appendChild(path);
+
+  // Return the final SVG
+  return pinSVG;
+}
+
+export function convertTimestamp(epochMS) {
+  /**
+   * @brief Converts time since epoch in MS to a formatted date string to be shown on a note card 
+   * @note formatted as month/day/full_year, x:xx:xx AM/PM
+   * @param epochMS time since epoch in MS 
+   * @return the formatted string 
+   */
+
+  const epochDate = new Date(epochMS); 
+  return epochDate.toLocaleString("en-US"); 
+}
+window.convertTimestamp = convertTimestamp; 

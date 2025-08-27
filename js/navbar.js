@@ -1,4 +1,4 @@
-/** @note: Make sure each js file imports from this modal file! */
+/** @note Make sure each js file imports from this modal file! */
 
 // Constants & Variables 
 
@@ -9,8 +9,8 @@
 // Functions 
 export async function injectNavBarTemplate() {
   /**
-   * @brief: Injects the navbar HTML into the current page 
-   * @return: nothing (void)
+   * @brief Injects the navbar HTML into the current page 
+   * @return nothing (void)
    */
 
   const result = await fetch("../navbar.tpl"); 

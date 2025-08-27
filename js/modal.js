@@ -1,4 +1,4 @@
-/** @note: Make sure each js file imports from this modal file! */
+/** @note Make sure each js file imports from this modal file! */
 
 // Constants & Variables
 
@@ -20,8 +20,8 @@ export async function injectModalTemplate() {
 
 export function setupModalListeners() {
   /**
-   * @brief: Sets any modal event listeners up that require ALL DOM content to be loaded 
-   * @return: none (void)
+   * @brief Sets any modal event listeners up that require ALL DOM content to be loaded 
+   * @return none (void)
    */
 
   // Create button
@@ -35,12 +35,12 @@ export function setupModalListeners() {
 
 export function loadModal(type, options = {}) {
   /**
-   * @brief: Loads the specified modal window 
-   * @param type: The specific modal window 
+   * @brief Loads the specified modal window 
+   * @param type The specific modal window 
     * type = {"create", "edit"}
     * "create" is global, "edit" is specific to Notes Manager page 
-   * @param options: Any associated input/information needed to load the modal
-   * @return: nothing (void)
+   * @param options Any associated input/information needed to load the modal
+   * @return nothing (void)
    */
 
   // Populate options 
@@ -55,9 +55,9 @@ export function loadModal(type, options = {}) {
 
 function closeModal(modalBackdrop) {
   /**
-   * @brief: Exits the current modal window (regardless of what it is)
-   * @param modalBackdrop: The backdrop to hide upon closing
-   * @return: nothing (void)
+   * @brief Exits the current modal window (regardless of what it is)
+   * @param modalBackdrop The backdrop to hide upon closing
+   * @return nothing (void)
    */
 
   // Exit the edit modal 
@@ -67,9 +67,9 @@ function closeModal(modalBackdrop) {
 
 function openCreateModal() {
   /**
-   * @brief: Opens the Edit a Note modal 
-   * @note: Helper for loadModal()
-   * @return: nothing (void)
+   * @brief Opens the Edit a Note modal 
+   * @note Helper for loadModal()
+   * @return nothing (void)
    */
 
   // Populate model template
@@ -100,11 +100,11 @@ function openCreateModal() {
 
 function saveNote(noteContent, modalBackdrop) {
   /**
-   * @brief: Saves the newly created note
-   * @note: Helper for openCreateModal()
-   * @param noteContent: The note's content to save 
-   * @param modalBackdrop: The modal backdrop to hide upon saving
-   * @return: nothing (void)
+   * @brief Saves the newly created note
+   * @note Helper for openCreateModal()
+   * @param noteContent The note's content to save 
+   * @param modalBackdrop The modal backdrop to hide upon saving
+   * @return nothing (void)
    */
 
   // TODO: Implement
@@ -116,7 +116,7 @@ function saveNote(noteContent, modalBackdrop) {
   // Save the note 
   const randomId = crypto.randomUUID(); 
   const now = Date.now(); 
-  window.notesById[randomId] = {"content": noteContent, "createdAt": now, "wasUpdated": false, "updatedAt": null, "lastChangeAt": now, "isDeleted": false, "deletedAt": null}; 
+  window.notesById[randomId] = {"content": noteContent, "createdAt": now, "wasUpdated": false, "updatedAt": null, "lastChangeAt": now, "isDeleted": false, "deletedAt": null, "pinned": false}; 
   window.notesByOrder.unshift(randomId); 
   localStorage.setItem("notesById", JSON.stringify(window.notesById)); 
   localStorage.setItem("notesByOrder", JSON.stringify(window.notesByOrder)); 
@@ -127,10 +127,10 @@ function saveNote(noteContent, modalBackdrop) {
 
 function openEditModal(noteId) {
   /**
-   * @brief: Opens the Create a Note modal 
-   * @note: Helper for loadModal()
-   * @param noteId: The unique id of the note to edit
-   * @return: nothing (void)
+   * @brief Opens the Create a Note modal 
+   * @note Helper for loadModal()
+   * @param noteId The unique id of the note to edit
+   * @return nothing (void)
    */
 
   // Populate modal template 
@@ -156,12 +156,12 @@ function openEditModal(noteId) {
 
 function saveEdit(noteId, modalBackdrop, newContent) {
   /**
-   * @brief: Saves the edited note
-   * @note: Helper for editNote()
-   * @param noteId: The unique id of the edited note to save
-   * @param modalBackdrop: The modal object to hide after saving
-   * @param newContent: The new, edited string to be used as the note's content
-   * @return: nothing (void)
+   * @brief Saves the edited note
+   * @note Helper for editNote()
+   * @param noteId The unique id of the edited note to save
+   * @param modalBackdrop The modal object to hide after saving
+   * @param newContent The new, edited string to be used as the note's content
+   * @return nothing (void)
    */
   
   // If the content hasn't changed, warn the user 
