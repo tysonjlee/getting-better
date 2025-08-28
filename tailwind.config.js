@@ -3,7 +3,7 @@ module.exports = {
   content: [
     "./pages/*.html",              
     "./js/**/*.js",
-    "./*.tpl"
+    "./components/*.tpl"
   ],
   theme: {
     extend: {
