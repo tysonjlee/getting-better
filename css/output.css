@@ -671,14 +671,6 @@ video {
   height: auto;
 }
 
-.h-7 {
-  height: 1.75rem;
-}
-
-.h-8 {
-  height: 2rem;
-}
-
 .w-10 {
   width: 2.5rem;
 }
@@ -697,14 +689,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-7 {
-  width: 1.75rem;
-}
-
-.w-8 {
-  width: 2rem;
 }
 
 .max-w-\[85rem\] {
@@ -892,20 +876,16 @@ video {
   padding-bottom: 1rem;
 }
 
+.pb-8 {
+  padding-bottom: 2rem;
+}
+
 .pr-1 {
   padding-right: 0.25rem;
 }
 
 .pt-1 {
   padding-top: 0.25rem;
-}
-
-.pt-2 {
-  padding-top: 0.5rem;
-}
-
-.pr-2 {
-  padding-right: 0.5rem;
 }
 
 .text-center {
@@ -980,7 +960,7 @@ video {
 
 /* Preline UI */
 
-@source "./node_modules/preline/dist/*.js";
+@source "../node_modules/preline/dist/*.js";
 
 /* Plugins */
 
@@ -991,12 +971,11 @@ video {
 .notes-container {
   display: flex;
   min-height: 250px;
-  max-width: 90%;
+  max-width: 80%;
   flex-direction: row;
   flex-wrap: wrap;
-  align-content: center;
-  align-items: center;
   justify-content: space-evenly;
+  gap: 2rem;
 }
 
 .note-card {
@@ -1081,7 +1060,7 @@ body {
   margin-right: auto;
   display: flex;
   max-height: 100px;
-  max-width: 24rem;
+  width: 100%;
   align-content: center;
   align-items: center;
   justify-content: center;
