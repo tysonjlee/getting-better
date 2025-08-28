@@ -13,7 +13,7 @@ export async function injectNavBarTemplate() {
    * @return nothing (void)
    */
 
-  const result = await fetch("../navbar.tpl"); 
+  const result = await fetch("../components/navbar.tpl"); 
   const text = await result.text(); 
   const template = document.createElement("template"); 
   template.innerHTML = text.trim();  

@@ -7,7 +7,7 @@
 // Functions 
 export async function injectModalTemplate() {
   // Get the HTML template
-  const result = await fetch("../modal.tpl"); 
+  const result = await fetch("../components/modal.tpl"); 
   const text = await result.text(); 
   const template = document.createElement("template"); 
   template.innerHTML = text.trim(); 

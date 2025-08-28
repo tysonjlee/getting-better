@@ -4,15 +4,15 @@
 @tailwind utilities;
 
 /* Preline UI */
-@source "./node_modules/preline/dist/*.js";
-@import "./node_modules/preline/variants.css";
+@source "../node_modules/preline/dist/*.js";
+@import "../node_modules/preline/variants.css";
 
 /* Plugins */
 @plugin "@tailwindcss/forms";
 
 /* Notes Display */
 .notes-container {
-  @apply flex flex-row justify-evenly content-center items-center flex-wrap max-w-[90%] min-h-[250px];
+  @apply flex flex-row justify-evenly flex-wrap gap-8 max-w-[80%] min-h-[250px];
 }
 
 .note-card {
@@ -41,7 +41,7 @@ body {
 }
 
 .title {
-  @apply flex justify-center items-center content-center mx-auto max-w-96 max-h-[100px] text-6xl bebas-neue-regular underline decoration-solid decoration-4 underline-offset-4 pt-1 pb-8 text-midnight-text transition-all duration-100 hover:scale-105; 
+  @apply flex justify-center items-center content-center mx-auto w-full max-h-[100px] text-6xl bebas-neue-regular underline decoration-solid decoration-4 underline-offset-4 pt-1 pb-8 text-midnight-text transition-all duration-100 hover:scale-105; 
 }
 
 .button-icon {

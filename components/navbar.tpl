@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between">
       <a class="flex-none text-xl focus:outline-hidden focus:opacity-80" text-midnight-text href="./index.html" aria-label="Getting Better">
         <span class="inline-flex items-center gap-x-2 text-xl inter-semibold text-midnight-text transition-all duration-200 hover:scale-110">
-          <img class="w-10 h-auto " src="./assets/images/logos/brand-logo.png" alt="Logo">
+          <img class="w-10 h-auto " src="../assets/images/logos/brand-logo.png" alt="Logo">
           Getting Better
         </span>
       </a>

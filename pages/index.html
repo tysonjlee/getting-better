@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./css/output.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="../css/output.css">
+    <link rel="stylesheet" href="../css/index.css">
   </head>
   <body>
     <!--Navigation Bar (Injected through JS)-->
@@ -19,12 +19,11 @@
     <!--Main Content-->
     <main class="px-8 py-4 mx-auto">
       <!--Dashboard-->
-      <div>
+      <div class="flex flex-col items-center pb-8">
         <!--Title-->
         <h1 class="title">Dashboard</h1>
         <!--Saved Notes-->
-        <div id="notes-container-id" class="notes-container">
-        </div>
+        <div id="notes-container-id" class="notes-container"></div>
       </div>
 
       <!--Search Query-->
@@ -37,7 +36,7 @@
     <!--Modal Backdrop (Injected through JS)-->
 
     <!--JS Scripts/Modules-->
-    <script type="module" src="./js/index.js" defer></script>
-    <script src="./node_modules/preline/dist/preline.js" defer></script>
+    <script type="module" src="../js/index.js" defer></script>
+    <script src="../node_modules/preline/dist/preline.js" defer></script>
   </body>
 </html>
