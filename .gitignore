@@ -19,11 +19,13 @@ pnpm-debug.log*
 node_modules/
 package-lock.json
 
-
 # Build output
 dist/
 build/
 *.min.css
+
+# Personal Documentation 
+personal-docs
 
 # Tailwind CLI Output file (show publicly for now; remove comment later if wanting to hide)
 # output.css
