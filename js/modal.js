@@ -59,6 +59,7 @@ function closeModal(modalBackdrop) {
   window.render(window.currentPage); 
 }
 
+// CREATE MODAL
 function openCreateModal() {
   /**
    * @brief Opens the Edit a Note modal 
@@ -119,6 +120,7 @@ function saveNote(noteContent, modalBackdrop) {
   closeModal(modalBackdrop); 
 }
 
+// EDIT MODAL
 function openEditModal(noteId) {
   /**
    * @brief Opens the Create a Note modal 
@@ -180,4 +182,9 @@ function saveEdit(noteId, modalBackdrop, newContent) {
 
   // Close the edit modal
   closeModal(modalBackdrop);  
+}
+
+// NOTE MODAL
+function openNoteModal() {
+  // TODO: Implement
 }
