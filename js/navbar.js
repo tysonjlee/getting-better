@@ -1,4 +1,4 @@
-/** @note Make sure each js file imports from this modal file! */
+/** @note Make sure each js file imports from this navbar odal file! */
 
 // Constants & Variables 
 

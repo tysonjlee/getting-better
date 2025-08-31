@@ -1,9 +1,3 @@
-/** @note Make sure each js file imports from this modal file! */
-
-// Constants & Variables
-
-// Event Listeners
-
 // Functions 
 export async function injectModalTemplate() {
   // Get the HTML template

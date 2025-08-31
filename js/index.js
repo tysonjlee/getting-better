@@ -1,10 +1,7 @@
 // Imports
 import {
-  notesById,
-  notesByOrder,
-  notesPinnedByOrder,
   render, 
-  createSVG
+  createNoteCardElement
 } from "./global.js";
 import {
   injectModalTemplate,
@@ -22,7 +19,7 @@ window.addEventListener("load", async () => {
   await injectNavBarTemplate(); 
   await injectModalTemplate(); 
   setupModalListeners(); 
-  render("home"); 
+  render(window.currentPage); 
 });
 
 // Functions
@@ -52,38 +49,13 @@ function renderDashboard() {
   // Show pinned first 
   let displayedNotes = []; // Note id's
   let i = 0; 
-  for (const id of notesPinnedByOrder) {
+  const mergedNotes = window.notesPinnedByOrder.concat(window.notesByOrder); // Still contains duplicate ids! 
+  for (const id of mergedNotes) {
     if (i > 3) break; 
-    const noteCard = document.createElement("div"); 
-    noteCard.className = "note-card"; 
-    const topRowDiv = document.createElement("div"); 
-    topRowDiv.className = "flex justify-end items-start w-full"
-    noteCard.append(topRowDiv); 
-    const pinStatusSVG = createSVG("pin-status"); 
-    topRowDiv.append(pinStatusSVG); 
-    const noteContent = document.createElement("div"); 
-    noteContent.className = "note-content";
-    noteContent.textContent = notesById[id].content; 
-    noteCard.append(noteContent); 
+    if (displayedNotes.includes(id)) continue; 
+    const noteCard = createNoteCardElement(id, {pinned: window.notesById[id].pinned}); 
     notesContainer.append(noteCard); 
-    displayedNotes.unshift(id); 
+    displayedNotes.push(id); 
     ++i; 
-  }
-
-  // Show remaining cards if needed 
-  if (i < 4) {
-    for (const id of notesByOrder) {
-      if (i > 3) break; 
-      if (displayedNotes.includes(id)) continue; 
-      const noteCard = document.createElement("div"); 
-      noteCard.className = "note-card"; 
-      const noteContent = document.createElement("div"); 
-      noteContent.className = "note-content";
-      noteContent.textContent = notesById[id].content; 
-      noteCard.append(noteContent); 
-      notesContainer.append(noteCard); 
-      displayedNotes.unshift(id); 
-      ++i; 
-    }
   }
 }
