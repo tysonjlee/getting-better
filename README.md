@@ -82,6 +82,7 @@ The documentation below is for my personal use :p
   - Store info (notes, user data, etc.) on backend 
 - Pinned Notes - pin a note to your dashboard 
 - Search Query - search for relative notes by keywords or note content (AI implementation)
+- Note Modal - click on a note to reveal more information 
 - Organization refactor - remove Deleted Notes page & centralize into Notes Manager page
   - Automatically show all created & edited notes 
   - Notes sorting/filtering
