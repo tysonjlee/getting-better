@@ -67,13 +67,22 @@ window.render = render;
 
 // Event Listeners
 window.addEventListener("load", async () => {
-  await injectNavBarTemplate(); 
-  await injectCreateModalTemplate(); 
-  setupModalListeners(); 
-  render(window.currentPage); 
+  setupPage(); 
 });
 
 // Functions
+async function setupPage() {
+  /**
+   * @brief Calls all necessary functions that should be ran on every page 
+   * @return nothing (void)
+   */
+
+  await injectNavBarTemplate(); 
+  await injectCreateModalTemplate(); 
+  setupModalListeners(); 
+  render(window.currentPage);   
+}
+
 export function createNoteCardElement(id, options = {}) {
   /**
    * @brief Creates a note card div element for an already existing note (id)
