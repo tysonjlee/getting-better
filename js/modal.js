@@ -186,5 +186,19 @@ function saveEdit(noteId, modalBackdrop, newContent) {
 
 // NOTE MODAL
 function openNoteModal() {
-  // TODO: Implement
+  /**
+   * @brief Opens the Note Modal
+   * @return nothing (void)
+   */
+
+  // Show modal backdrop
+  const modalBackdrop = document.getElementById("modal-backdrop"); 
+  modalBackdrop.classList.remove("hidden"); 
+
+  // Add event listener to close modal on outside click
+
+
+  // Populate note modal template
+  
+
 }
