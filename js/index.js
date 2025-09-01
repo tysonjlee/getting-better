@@ -41,6 +41,7 @@ function renderDashboard() {
    * @note Helper for renderHome()
    * @return nothing (void)
    */
+  
   // Clear the notes container
   const notesContainer = document.getElementById("notes-container-id"); 
   notesContainer.innerHTML = ""; 

@@ -56,6 +56,7 @@ export async function render(page) {
     deletedModule.renderDeleted(); 
   }
 }
+window.render = render; 
 
 export function createNoteCardElement(id, options = {}) {
   /**
