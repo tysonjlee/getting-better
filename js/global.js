@@ -2,7 +2,8 @@
 
 // Imports 
 import {
-  loadModal
+  loadModal, 
+  openNoteModal
 } from "./modal.js"; 
 
 // Constants & Variables 
@@ -85,6 +86,11 @@ export function createNoteCardElement(id, options = {}) {
   const noteCard = document.createElement("div");
   noteCard.className = "note-card";
   noteCard.id = `note-${id}`;  
+
+  // Add event listener for note modal 
+  noteCard.addEventListener("click", () => {
+    openNoteModal(); 
+  }); 
 
   // Add top row div 
   const topRowDiv = document.createElement("div"); 
