@@ -1,5 +1,5 @@
 // Functions 
-export async function injectModalTemplate() {
+export async function injectCreateModalTemplate() {
   // Get the HTML template
   const result = await fetch("../components/create-modal.tpl"); 
   const text = await result.text(); 
@@ -199,6 +199,6 @@ function openNoteModal() {
 
 
   // Populate note modal template
-  
+
 
 }

@@ -4,7 +4,7 @@ import {
   createNoteCardElement
 } from "./global.js";
 import {
-  injectModalTemplate,
+  injectCreateModalTemplate,
   setupModalListeners
 } from "./modal.js"
 import {
@@ -17,7 +17,7 @@ window.currentPage = "home";
 // Event listeners 
 window.addEventListener("load", async () => {
   await injectNavBarTemplate(); 
-  await injectModalTemplate(); 
+  await injectCreateModalTemplate(); 
   setupModalListeners(); 
   render(window.currentPage); 
 });
