@@ -2,6 +2,11 @@
 
 // Imports 
 import {
+  injectNavBarTemplate
+} from "./navbar.js"; 
+import {
+  injectCreateModalTemplate, 
+  setupModalListeners,
   loadModal, 
   openNoteModal
 } from "./modal.js"; 
@@ -59,6 +64,16 @@ export async function render(page) {
 }
 window.render = render; 
 
+
+// Event Listeners
+window.addEventListener("load", async () => {
+  await injectNavBarTemplate(); 
+  await injectCreateModalTemplate(); 
+  setupModalListeners(); 
+  render(window.currentPage); 
+});
+
+// Functions
 export function createNoteCardElement(id, options = {}) {
   /**
    * @brief Creates a note card div element for an already existing note (id)

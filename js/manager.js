@@ -1,28 +1,13 @@
 // Imports
 import {
   createNoteCardElement, 
-  render
 } from "./global.js";
-import {
-  injectCreateModalTemplate,
-  setupModalListeners
-} from "./modal.js"
-import {
-  injectNavBarTemplate
-} from "./navbar.js"
 
 // Constants & Variables  
 const notesContainer = document.getElementById("notes-container-id");
 window.currentPage = "manager"; 
 
 // Event Listeners 
-window.addEventListener("load", async () => {
-  await injectNavBarTemplate(); 
-  await injectCreateModalTemplate(); 
-  setupModalListeners(); 
-  render(window.currentPage); 
-}); 
-
 
 // Functions 
 export function renderManager() {

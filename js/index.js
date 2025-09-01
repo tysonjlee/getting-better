@@ -1,26 +1,12 @@
 // Imports
 import {
-  render, 
   createNoteCardElement
 } from "./global.js";
-import {
-  injectCreateModalTemplate,
-  setupModalListeners
-} from "./modal.js"
-import {
-  injectNavBarTemplate
-} from "./navbar.js"
 
 // Constants & Variables
 window.currentPage = "home"; 
 
-// Event listeners 
-window.addEventListener("load", async () => {
-  await injectNavBarTemplate(); 
-  await injectCreateModalTemplate(); 
-  setupModalListeners(); 
-  render(window.currentPage); 
-});
+// Event Listeners
 
 // Functions
 export function renderHome() {
