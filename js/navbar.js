@@ -1,5 +1,3 @@
-/** @note Make sure each js file imports from this navbar odal file! */
-
 // Constants & Variables 
 
 
