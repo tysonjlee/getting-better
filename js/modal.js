@@ -1,4 +1,17 @@
 // Functions 
+export async function injectNoteModalTemplate() {
+  // Get the HTML template
+  const result = await fetch("../components/note-modal.tpl"); 
+  const text = await result.text(); 
+  const template = document.createElement("template"); 
+  template.innerHTML = text.trim(); 
+
+  // Append before the JS scripts
+  const scripts = document.querySelectorAll("script"); 
+  const firstScript = scripts[0]; 
+  document.body.insertBefore(template.content.firstElementChild, firstScript); 
+}
+
 export async function injectCreateModalTemplate() {
   // Get the HTML template
   const result = await fetch("../components/create-modal.tpl"); 
@@ -56,7 +69,7 @@ function closeModal(modalBackdrop) {
 
   // Exit the edit modal 
   modalBackdrop.classList.add("hidden"); 
-  window.render(window.currentPage); 
+  window.App.render(window.currentPage); 
 }
 
 // CREATE MODAL
@@ -111,10 +124,10 @@ function saveNote(noteContent, modalBackdrop) {
   // Save the note 
   const randomId = crypto.randomUUID(); 
   const now = Date.now(); 
-  window.notesById[randomId] = {"content": noteContent, "createdAt": now, "wasUpdated": false, "updatedAt": null, "lastChangeAt": now, "isDeleted": false, "deletedAt": null, "pinned": false}; 
-  window.notesByOrder.unshift(randomId); 
-  localStorage.setItem("notesById", JSON.stringify(window.notesById)); 
-  localStorage.setItem("notesByOrder", JSON.stringify(window.notesByOrder)); 
+  window.App.notesById[randomId] = {"content": noteContent, "createdAt": now, "wasUpdated": false, "updatedAt": null, "lastChangeAt": now, "isDeleted": false, "deletedAt": null, "pinned": false}; 
+  window.App.notesByOrder.unshift(randomId); 
+  localStorage.setItem("notesById", JSON.stringify(window.App.notesById)); 
+  localStorage.setItem("notesByOrder", JSON.stringify(window.App.notesByOrder)); 
     
   // Close the create modal
   closeModal(modalBackdrop); 
@@ -142,7 +155,7 @@ function openEditModal(noteId) {
   modalTitle.innerHTML = "Edit a Note"; 
 
   const modalBody = document.getElementById("modal-body"); 
-  modalBody.value = window.notesById[noteId].content;   
+  modalBody.value = window.App.notesById[noteId].content;   
 
   const saveButton = document.getElementById("save-button-id"); 
   saveButton.addEventListener("click", () => {
@@ -162,43 +175,104 @@ function saveEdit(noteId, modalBackdrop, newContent) {
   
   // If the content hasn't changed, warn the user 
   // TODO: Implement this 
-  if (newContent === window.notesById[noteId].content) {
+  if (newContent === window.App.notesById[noteId].content) {
     console.log("The content is the same!"); 
   }
 
   // Save the edited note 
   const now = Date.now(); 
 
-  const editedNote = window.notesById[noteId]; 
+  const editedNote = window.App.notesById[noteId]; 
   editedNote.content = newContent; 
   editedNote.wasUpdated = true; 
   editedNote.updatedAt = now; 
   editedNote.lastChangeAt = now; 
-  localStorage.setItem("notesById", JSON.stringify(window.notesById)); 
+  localStorage.setItem("notesById", JSON.stringify(window.App.notesById)); 
 
-  window.notesByOrder.splice(window.notesByOrder.indexOf(noteId), 1); 
-  window.notesByOrder.unshift(noteId); 
-  localStorage.setItem("notesByOrder", JSON.stringify(window.notesByOrder));
+  window.App.notesByOrder.splice(window.App.notesByOrder.indexOf(noteId), 1); 
+  window.App.notesByOrder.unshift(noteId); 
+  localStorage.setItem("notesByOrder", JSON.stringify(window.App.notesByOrder));
 
   // Close the edit modal
   closeModal(modalBackdrop);  
 }
 
 // NOTE MODAL
-function openNoteModal() {
+export function openNoteModal(id) {
   /**
-   * @brief Opens the Note Modal
+   * @brief Opens the Note Modal for a specific note
+   * @param id The id of the note to open
    * @return nothing (void)
    */
 
   // Show modal backdrop
-  const modalBackdrop = document.getElementById("modal-backdrop"); 
+  const modalBackdrop = document.getElementById("note-modal-backdrop"); 
   modalBackdrop.classList.remove("hidden"); 
 
   // Add event listener to close modal on outside click
-
+  // Also add event listener to prevent closing on inside click (inside modal window)
+  modalBackdrop.addEventListener("click", () => {
+    closeModal(modalBackdrop); 
+  });
+  const modalWindow = document.getElementById("note-modal-window"); 
+  modalWindow.addEventListener("click", (event) => {
+    event.stopPropagation(); 
+  }); 
 
   // Populate note modal template
+  const topRow = document.querySelector(".note-top-row")
+  const timestamp = document.querySelector(".note-modal-timestamp"); 
+  if (window.App.notesById[id].wasUpdated) timestamp.textContent = "Edited " + window.App.convertTimestamp(window.App.notesById[id].updatedAt); 
+  else timestamp.textContent = "Created " + window.App.convertTimestamp(window.App.notesById[id].createdAt);
+  
+  if (window.App.notesById[id].pinned) {
+    const pinStatusSVG = window.App.createSVG("pin-status"); 
+    topRow.append(pinStatusSVG); 
+  }
 
+  const content = document.getElementById("note-modal-body"); 
+  content.textContent = window.App.notesById[id].content; 
+
+  const bottomRow = document.querySelector(".note-bottom-row")
+  console.log(bottomRow); 
+  
+  if (!window.App.notesById[id].isDeleted) { // If an active note
+      const pinButton = document.createElement("button"); 
+      pinButton.className = "button-icon"; 
+      const pinSVG = window.App.createSVG("pin-button"); 
+      pinButton.append(pinSVG); 
+      pinButton.addEventListener("click", () => {
+        window.App.togglePin(id); 
+      }); 
+      bottomRow.append(pinButton);
+
+    const deleteButton = document.createElement("button"); 
+    deleteButton.className = "button-icon"; 
+    const deleteSVG = window.App.createSVG("delete"); 
+    deleteButton.append(deleteSVG); 
+    deleteButton.addEventListener("click", () => {
+      window.App.deleteNote(id); 
+    }); 
+    bottomRow.append(deleteButton);
+
+    const editButton = document.createElement("button"); 
+    editButton.className = "button-icon"; 
+    const editSVG = window.App.createSVG("edit"); 
+    editButton.append(editSVG); 
+    editButton.addEventListener("click", () => {
+      loadModal("edit", {noteId: id});  
+    }); 
+    bottomRow.append(editButton);
+        
+  } else { // Otherwise if a deleted note
+    const recoverButton = document.createElement("button"); 
+    recoverButton.className = "button-icon"; 
+    const recoverSVG = window.App.createSVG("recover"); 
+    recoverButton.append(recoverSVG);  
+    recoverButton.addEventListener("click", () => {
+      window.App.recoverNote(id); 
+    }); 
+    bottomRow.append(recoverButton);
+  }
 
 }

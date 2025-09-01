@@ -1,7 +1,5 @@
 // Imports
-import {
-  createNoteCardElement, 
-} from "./global.js";
+import {} from "./global.js";
 
 // Constants & Variables  
 const notesContainer = document.getElementById("notes-container-id");
@@ -15,9 +13,9 @@ export function renderManager() {
   notesContainer.innerHTML = ""; 
 
   // Show all notes ascending by time
-  for (const id of window.notesByOrder) {
+  for (const id of window.App.notesByOrder) {
     // Create & append note card to notesContainer
-    const noteCard = createNoteCardElement(id, {timestamp: window.notesById[id].lastChangeAt, pinned: window.notesById[id].pinned, showButtons: true, buttons: {pinButton: true, editButton: true, deleteButton: true}});
+    const noteCard = window.App.createNoteCardElement(id, {timestamp: window.App.notesById[id].lastChangeAt, pinned: window.App.notesById[id].pinned, showButtons: true, buttons: {pinButton: true, editButton: true, deleteButton: true}});
     notesContainer.append(noteCard); 
   }
 }

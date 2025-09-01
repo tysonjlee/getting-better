@@ -8,12 +8,15 @@ import {
   injectCreateModalTemplate, 
   setupModalListeners,
   loadModal, 
-  openNoteModal
+  openNoteModal,
+  injectNoteModalTemplate
 } from "./modal.js"; 
 
 // Constants & Variables 
-export const notesById = JSON.parse(localStorage.getItem("notesById")) || {}; // Single truth source 
-window.notesById = notesById; 
+window.App = window.App || {};
+
+const notesById = JSON.parse(localStorage.getItem("notesById")) || {}; // Single truth source 
+window.App.notesById = notesById; 
 /**
  * notesById = {
  *  "uniqueId1": {
@@ -30,21 +33,19 @@ window.notesById = notesById;
  * }
  */
 
-export const notesByOrder = JSON.parse(localStorage.getItem("notesByOrder")) || []; // Array of note ID's descending by timestamp created/edited
-window.notesByOrder = notesByOrder; 
-// notesByOrder = ["uniqueId20", "uniqueId19", "uniqueId18", ...]
+const notesByOrder = JSON.parse(localStorage.getItem("notesByOrder")) || []; // Array of note ID's descending by timestamp created/edited
+window.App.notesByOrder = notesByOrder; 
 
-export const notesPinnedByOrder = JSON.parse(localStorage.getItem("notesPinnedByOrder")) || []; // Array of pinned note ID's descending by timestamp pinned
-window.notesPinnedByOrder = notesPinnedByOrder; 
+const notesPinnedByOrder = JSON.parse(localStorage.getItem("notesPinnedByOrder")) || []; // Array of pinned note ID's descending by timestamp pinned
+window.App.notesPinnedByOrder = notesPinnedByOrder; 
 
-export const notesDeletedByOrder = JSON.parse(localStorage.getItem("notesDeletedByOrder")) || []; // Array of deleted note ID's descending by timestamp deleted
-window.notesDeletedByOrder = notesDeletedByOrder; 
-// notesDeletedByOrder = ["uniqueId200", "uniqueId199", "uniqueId198", ...]
+const notesDeletedByOrder = JSON.parse(localStorage.getItem("notesDeletedByOrder")) || []; // Array of deleted note ID's descending by timestamp deleted
+window.App.notesDeletedByOrder = notesDeletedByOrder; 
 
 // Event Listeners 
 
 // Functions 
-export async function render(page) {
+async function render(page) {
   /**
    * @brief Renders the specified page 
    * @param page The specific page to render
@@ -62,7 +63,7 @@ export async function render(page) {
     deletedModule.renderDeleted(); 
   }
 }
-window.render = render; 
+window.App.render = render; 
 
 
 // Event Listeners
@@ -79,11 +80,12 @@ async function setupPage() {
 
   await injectNavBarTemplate(); 
   await injectCreateModalTemplate(); 
+  await injectNoteModalTemplate(); 
   setupModalListeners(); 
   render(window.currentPage);   
 }
 
-export function createNoteCardElement(id, options = {}) {
+function createNoteCardElement(id, options = {}) {
   /**
    * @brief Creates a note card div element for an already existing note (id)
    * @param id: The id of the note to target 
@@ -113,7 +115,7 @@ export function createNoteCardElement(id, options = {}) {
 
   // Add event listener for note modal 
   noteCard.addEventListener("click", () => {
-    openNoteModal(); 
+    openNoteModal(id); 
   }); 
 
   // Add top row div 
@@ -144,7 +146,7 @@ export function createNoteCardElement(id, options = {}) {
 
   // Add bottom row div (actions/buttons)
   const noteActions = document.createElement("div"); 
-  noteActions.className = "note-actions-row"
+  noteActions.className = "note-bottom-row"
   noteCard.append(noteActions);
 
   // OPTIONAL: Actions (buttons)
@@ -201,6 +203,7 @@ export function createNoteCardElement(id, options = {}) {
   // Return the final note card
   return noteCard; 
 }
+window.App.createNoteCardElement = createNoteCardElement; 
 
 function deleteNote(id) {
   /**
@@ -228,6 +231,7 @@ function deleteNote(id) {
     cardToDelete.remove();                               
   }
 }
+window.App.deleteNote = deleteNote; 
 
 function togglePin(id) {
   /** 
@@ -255,6 +259,7 @@ function togglePin(id) {
   
   render(window.currentPage); 
 }
+window.App.togglePin = togglePin; 
 
 function recoverNote(id) {
   /**
@@ -266,19 +271,20 @@ function recoverNote(id) {
 
   const cardToRecover = document.getElementById(`note-${id}`); 
   if (cardToRecover) {
-    window.notesById[id].isDeleted = false; 
-    window.notesById[id].deletedAt = null; 
-    localStorage.setItem("notesById", JSON.stringify(window.notesById));
+    window.App.notesById[id].isDeleted = false; 
+    window.App.notesById[id].deletedAt = null; 
+    localStorage.setItem("notesById", JSON.stringify(window.App.notesById));
 
-    window.notesByOrder.splice(findInsertIndex(id), 0, id); 
-    localStorage.setItem("notesByOrder", JSON.stringify(window.notesByOrder)); 
+    window.App.notesByOrder.splice(findInsertIndex(id), 0, id); 
+    localStorage.setItem("notesByOrder", JSON.stringify(window.App.notesByOrder)); 
 
-    window.notesDeletedByOrder.splice(window.notesDeletedByOrder.indexOf(id), 1); 
-    localStorage.setItem("notesDeletedByOrder", JSON.stringify(window.notesDeletedByOrder)); 
+    window.App.notesDeletedByOrder.splice(window.App.notesDeletedByOrder.indexOf(id), 1); 
+    localStorage.setItem("notesDeletedByOrder", JSON.stringify(window.App.notesDeletedByOrder)); 
     
     cardToRecover.remove();                               
   }
 }
+window.App.recoverNote = recoverNote; 
 
 function findInsertIndex(id) {
   /**
@@ -291,20 +297,20 @@ function findInsertIndex(id) {
    */
 
   // Edge case: If notesByOrder is empty, return 0 
-  if (window.notesByOrder.length === 0) return 0; 
+  if (window.App.notesByOrder.length === 0) return 0; 
 
   // Get note to recover's timestamp 
-  const noteToRecover = window.notesById[id]; 
+  const noteToRecover = window.App.notesById[id]; 
   const noteToRecoverTimestamp = noteToRecover.lastChangeAt; 
 
   // Use binary search to find index 
   /** @note Remember that notesByOrder is by timestamp DESCENDING! */
   let lo = 0; 
-  let hi = window.notesByOrder.length - 1; 
+  let hi = window.App.notesByOrder.length - 1; 
   while (lo < hi) {
     // Get middle object's timestamp 
     let mid = Math.floor(lo + (hi - lo) / 2); 
-    let midNote = window.notesById[window.notesByOrder[mid]];
+    let midNote = window.App.notesById[window.App.notesByOrder[mid]];
     let midTimestamp = midNote.lastChangeAt; 
 
     // If mid is less than our timestamp, adjust window left 
@@ -315,11 +321,11 @@ function findInsertIndex(id) {
   }
 
   // arr[lo] is the first element <= ourTimestamp
-  if (window.notesById[window.notesByOrder[lo]].lastChangeAt > noteToRecoverTimestamp) return lo + 1; 
+  if (window.App.notesById[window.App.notesByOrder[lo]].lastChangeAt > noteToRecoverTimestamp) return lo + 1; 
   else return lo;  
 }
 
-export function createSVG(type) {
+function createSVG(type) {
   /** 
    * @brief Dynamically creates an SVG element of the specified type
    * @note Doing this to allow for coloring of the editSVG via Tailwind
@@ -333,6 +339,7 @@ export function createSVG(type) {
   else if (type === "pin-button") return createPinButtonSVG(); 
   else if (type === "pin-status") return createPinStatusSVG(); 
 }
+window.App.createSVG = createSVG; 
 
 function createEditSVG() {
   /**
@@ -449,7 +456,7 @@ function createPinStatusSVG() {
   return pinSVG;
 }
 
-export function convertTimestamp(epochMS) {
+function convertTimestamp(epochMS) {
   /**
    * @brief Converts time since epoch in MS to a formatted date string to be shown on a note card 
    * @note formatted as month/day/full_year, x:xx:xx AM/PM
@@ -460,3 +467,4 @@ export function convertTimestamp(epochMS) {
   const epochDate = new Date(epochMS); 
   return epochDate.toLocaleString("en-US"); 
 }
+window.App.convertTimestamp = convertTimestamp; 

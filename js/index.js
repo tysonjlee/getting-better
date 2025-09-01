@@ -1,7 +1,5 @@
 // Imports
-import {
-  createNoteCardElement
-} from "./global.js";
+import {} from "./global.js";
 
 // Constants & Variables
 window.currentPage = "home"; 
@@ -36,11 +34,11 @@ function renderDashboard() {
   // Show pinned first 
   let displayedNotes = []; // Note id's
   let i = 0; 
-  const mergedNotes = window.notesPinnedByOrder.concat(window.notesByOrder); // Still contains duplicate ids! 
+  const mergedNotes = window.App.notesPinnedByOrder.concat(window.App.notesByOrder); // Still contains duplicate ids! 
   for (const id of mergedNotes) {
     if (i > 3) break; 
     if (displayedNotes.includes(id)) continue; 
-    const noteCard = createNoteCardElement(id, {pinned: window.notesById[id].pinned}); 
+    const noteCard = window.App.createNoteCardElement(id, {pinned: window.App.notesById[id].pinned}); 
     notesContainer.append(noteCard); 
     displayedNotes.push(id); 
     ++i; 

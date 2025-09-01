@@ -1,7 +1,5 @@
 // Imports
-import {
-  createNoteCardElement
-} from "./global.js"; 
+import {} from "./global.js"; 
 
 // Constants & Variables
 const notesContainer = document.getElementById("notes-container-id");
@@ -15,9 +13,9 @@ export function renderDeleted() {
   notesContainer.innerHTML = ""; 
 
   // Show all notes ascending by time
-  for (const id of window.notesDeletedByOrder) {
+  for (const id of window.App.notesDeletedByOrder) {
     // Create note-card 
-    const noteCard = createNoteCardElement(id, {timestamp: window.notesById[id].deletedAt, pinned: window.notesById[id].pinned, showButtons: true, buttons: {recoverButton: true}});
+    const noteCard = window.App.createNoteCardElement(id, {timestamp: window.App.notesById[id].deletedAt, pinned: window.App.notesById[id].pinned, showButtons: true, buttons: {recoverButton: true}});
 
     // Append final note-card to notesContainer
     notesContainer.append(noteCard); 
