@@ -1055,7 +1055,7 @@ video {
   font-style: normal;
 }
 
-.note-actions-row {
+.note-bottom-row {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
