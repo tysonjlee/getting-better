@@ -220,15 +220,14 @@ export function openNoteModal(id) {
   }); 
 
   // Populate note modal template
-  const topRow = document.querySelector(".note-top-row")
   const timestamp = document.querySelector(".note-modal-timestamp"); 
   if (window.App.notesById[id].wasUpdated) timestamp.textContent = "Edited " + window.App.convertTimestamp(window.App.notesById[id].updatedAt); 
   else timestamp.textContent = "Created " + window.App.convertTimestamp(window.App.notesById[id].createdAt);
   
-  if (window.App.notesById[id].pinned) {
-    const pinStatusSVG = window.App.createSVG("pin-status"); 
-    topRow.append(pinStatusSVG); 
-  }
+  const pinStatus = document.getElementById("pin-status"); 
+  if (!window.App.notesById[id].pinned) { // If not pinned, don't show the pin icon
+    pinStatus.classList.add("hidden"); 
+  } else pinStatus.classList.remove("hidden"); // Otherwise show it 
 
   const content = document.getElementById("note-modal-body"); 
   content.textContent = window.App.notesById[id].content; 
