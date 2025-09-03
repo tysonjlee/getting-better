@@ -7,7 +7,6 @@ import {
 import {
   injectCreateModalTemplate, 
   setupModalListeners,
-  loadModal, 
   openNoteModal,
   injectNoteModalTemplate
 } from "./modal.js"; 
@@ -84,125 +83,53 @@ async function setupPage() {
   render(window.currentPage);   
 }
 
-function createNoteCardElement(id, options = {}) {
+async function createNoteCardElement(id) {
   /**
    * @brief Creates a note card div element for an already existing note (id)
    * @param id: The id of the note to target 
-   * @param options Optional buttons, pin icon, etc. 
    * @return The final note card 
    */
 
-  // Populate options
-  const {
-    timestamp = null,
-    pinned = false,
-    showButtons = false,
-    buttons = {},
-  } = options; 
+  // Get note card from template
+  const noteCardTemplate = await getNoteCardTemplate(); 
+  const clone = noteCardTemplate.content.cloneNode(true);
+  const noteCard = clone.firstElementChild; 
 
-  const {
-    pinButton = false, 
-    editButton = false, 
-    deleteButton = false, 
-    recoverButton = false
-  } = buttons; 
-
-  // Create note-card 
-  const noteCard = document.createElement("div");
-  noteCard.className = "note-card";
-  noteCard.id = `note-${id}`;  
+  // Set id
+  noteCard.id = `note-${id}`; 
 
   // Add event listener for note modal 
   noteCard.addEventListener("click", () => {
     openNoteModal(id); 
   }); 
 
-  // Add top row div 
-  const topRowDiv = document.createElement("div"); 
-  topRowDiv.className = "flex justify-between items-start min-h-[24px] w-full"
-  noteCard.append(topRowDiv); 
+  // Add pin icon (if applicable)
+  if (notesById[id].pinned) noteCard.querySelector("#pin-status").classList.remove("hidden"); 
+  else noteCard.querySelector("#pin-status").classList.add("hidden");
 
-  // OPTIONAL: Timestamp
-  if (timestamp) {
-    const noteTimestamp = document.createElement("div"); 
-    noteTimestamp.className = "note-timestamp"; 
-    topRowDiv.append(noteTimestamp); 
-    if (notesById[id].wasUpdated) noteTimestamp.textContent = "Edited " + convertTimestamp(notesById[id].updatedAt); 
-    else noteTimestamp.textContent = "Created " + convertTimestamp(notesById[id].createdAt);  
-  }
-
-  // OPTIONAL: Pin icon
-  if (pinned) {
-    const pinStatusSVG = createSVG("pin-status"); 
-    topRowDiv.append(pinStatusSVG); 
-  }
-
-  // Add content
-  const noteContent = document.createElement("div");
-  noteContent.className = "note-content"; 
-  noteCard.append(noteContent);
-  noteContent.textContent = notesById[id].content; 
-
-  // Add bottom row div (actions/buttons)
-  const noteActions = document.createElement("div"); 
-  noteActions.className = "note-bottom-row"
-  noteCard.append(noteActions);
-
-  // OPTIONAL: Actions (buttons)
-  if (showButtons) {
-    // OPTIONAL: Pin button
-    if (pinButton) {
-      const pinButton = document.createElement("button"); 
-      pinButton.className = "button-icon"; 
-      const pinSVG = createSVG("pin-button"); 
-      pinButton.append(pinSVG); 
-      pinButton.addEventListener("click", () => {
-        togglePin(id); 
-      }); 
-      noteActions.append(pinButton);
-    }
-
-    // OPTIONAL: Delete button
-    if (deleteButton) {
-      const deleteButton = document.createElement("button"); 
-      deleteButton.className = "button-icon"; 
-      const deleteSVG = createSVG("delete"); 
-      deleteButton.append(deleteSVG); 
-      deleteButton.addEventListener("click", () => {
-        deleteNote(id); 
-      }); 
-      noteActions.append(deleteButton);
-    }
-
-    // OPTIONAL: Edit button
-    if (editButton) {
-      const editButton = document.createElement("button"); 
-      editButton.className = "button-icon"; 
-      const editSVG = createSVG("edit"); 
-      editButton.append(editSVG); 
-      editButton.addEventListener("click", () => {
-        loadModal("edit", {noteId: id});  
-      }); 
-      noteActions.append(editButton);
-    }
-
-    // OPTIONAL: Recover button 
-    if (recoverButton) {
-      const recoverButton = document.createElement("button"); 
-      recoverButton.className = "button-icon"; 
-      const recoverSVG = createSVG("recover"); 
-      recoverButton.append(recoverSVG);  
-      recoverButton.addEventListener("click", () => {
-        recoverNote(id); 
-      }); 
-      noteActions.append(recoverButton);
-    }
-  }
+  // Add content  
+  noteCard.querySelector("#note-content").textContent = notesById[id].content
 
   // Return the final note card
   return noteCard; 
 }
+
 window.App.createNoteCardElement = createNoteCardElement; 
+
+async function getNoteCardTemplate() {
+  /**
+   * @brief Returns the raw HTML from note-card.tpl wrapped in a <template>
+   * @return: The final, wrapped template
+   */
+
+  // Wrap raw HTML in a <template>
+  const response = await fetch("../components/note-card.tpl"); 
+  const text = await response.text(); 
+  const template = document.createElement("template"); 
+  template.innerHTML = text; 
+
+  return template; 
+}
 
 function deleteNote(id) {
   /**

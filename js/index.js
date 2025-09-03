@@ -19,7 +19,7 @@ export function renderHome() {
   // Render the search query // TODO: Implement 
 }
 
-function renderDashboard() {
+async function renderDashboard() {
   /**
    * @brief Renders the dashboard
    * @note Helper for renderHome()
@@ -28,7 +28,8 @@ function renderDashboard() {
   
   // Clear the notes container
   const notesContainer = document.getElementById("notes-container-id"); 
-  notesContainer.innerHTML = ""; 
+  notesContainer.innerHTML = "";
+ 
 
   // Show 4 most recent notes
   // Show pinned first 
@@ -38,7 +39,7 @@ function renderDashboard() {
   for (const id of mergedNotes) {
     if (i > 3) break; 
     if (displayedNotes.includes(id)) continue; 
-    const noteCard = window.App.createNoteCardElement(id, {pinned: window.App.notesById[id].pinned}); 
+    const noteCard = await window.App.createNoteCardElement(id); 
     notesContainer.append(noteCard); 
     displayedNotes.push(id); 
     ++i; 
