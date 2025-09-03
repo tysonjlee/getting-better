@@ -65,7 +65,6 @@ async function render(page) {
 }
 window.App.render = render; 
 
-
 // Event Listeners
 window.addEventListener("load", async () => {
   setupPage(); 
