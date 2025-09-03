@@ -220,7 +220,7 @@ export function openNoteModal(id) {
   }); 
 
   // Populate note modal template
-  const timestamp = document.querySelector(".note-modal-timestamp"); 
+  const timestamp = document.getElementById("note-modal-timestamp"); 
   if (window.App.notesById[id].wasUpdated) timestamp.textContent = "Edited " + window.App.convertTimestamp(window.App.notesById[id].updatedAt); 
   else timestamp.textContent = "Created " + window.App.convertTimestamp(window.App.notesById[id].createdAt);
   
@@ -232,7 +232,7 @@ export function openNoteModal(id) {
   const content = document.getElementById("note-modal-body"); 
   content.textContent = window.App.notesById[id].content; 
 
-  const bottomRow = document.querySelector(".note-bottom-row")
+  const bottomRow = document.getElementById("note-bottom-row")
   
   if (!window.App.notesById[id].isDeleted) { // If an active note
     const pinButton = document.createElement("button"); 
