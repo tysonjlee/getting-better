@@ -233,7 +233,6 @@ export function openNoteModal(id) {
   content.textContent = window.App.notesById[id].content; 
 
   const bottomRow = document.querySelector(".note-bottom-row")
-  console.log(bottomRow); 
   
   if (!window.App.notesById[id].isDeleted) { // If an active note
       const pinButton = document.createElement("button"); 
