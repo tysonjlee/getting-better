@@ -235,14 +235,14 @@ export function openNoteModal(id) {
   const bottomRow = document.querySelector(".note-bottom-row")
   
   if (!window.App.notesById[id].isDeleted) { // If an active note
-      const pinButton = document.createElement("button"); 
-      pinButton.className = "button-icon"; 
-      const pinSVG = window.App.createSVG("pin-button"); 
-      pinButton.append(pinSVG); 
-      pinButton.addEventListener("click", () => {
-        window.App.togglePin(id); 
-      }); 
-      bottomRow.append(pinButton);
+    const pinButton = document.createElement("button"); 
+    pinButton.className = "button-icon"; 
+    const pinSVG = window.App.createSVG("pin-button"); 
+    pinButton.append(pinSVG); 
+    pinButton.addEventListener("click", () => {
+      window.App.togglePin(id); 
+    }); 
+    bottomRow.append(pinButton);
 
     const deleteButton = document.createElement("button"); 
     deleteButton.className = "button-icon"; 
@@ -263,14 +263,14 @@ export function openNoteModal(id) {
     bottomRow.append(editButton);
         
   } else { // Otherwise if a deleted note
-    const recoverButton = document.createElement("button"); 
-    recoverButton.className = "button-icon"; 
-    const recoverSVG = window.App.createSVG("recover"); 
-    recoverButton.append(recoverSVG);  
-    recoverButton.addEventListener("click", () => {
-      window.App.recoverNote(id); 
-    }); 
-    bottomRow.append(recoverButton);
-  }
+      const recoverButton = document.createElement("button"); 
+      recoverButton.className = "button-icon"; 
+      const recoverSVG = window.App.createSVG("recover"); 
+      recoverButton.append(recoverSVG);  
+      recoverButton.addEventListener("click", () => {
+        window.App.recoverNote(id); 
+      }); 
+      bottomRow.append(recoverButton);
+    }
 
 }

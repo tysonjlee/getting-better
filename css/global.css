@@ -27,10 +27,6 @@
   @apply flex flex-row justify-evenly content-evenly items-center min-h-[150px] min-w-[400px] flex-wrap pl-[10px] pr-[10px] inter-light text-midnight-text; 
 }
 
-.note-top-row {
-
-}
-
 .note-bottom-row {
   @apply flex flex-row justify-end gap-[10px];
 }

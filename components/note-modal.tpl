@@ -1,9 +1,9 @@
 <div id="note-modal-backdrop" class="hidden inset-0 fixed flex items-center justify-center bg-black bg-opacity-50 z-50">
   <!--Modal Window-->
-  <div id="note-modal-window" class="flex flex-col items-center w-[60%] h-[55%] rounded-2xl shadow-2xl gap-3 p-5 bg-midnight-bg border-2 border-midnight-secondary">
-    <div class="flex flex-row justify-evenly w-[75%] h-[90%] p-12 rounded-lg bg-midnight-container">
+  <div id="note-modal-window" class="flex flex-col justify-center items-center w-[60%] h-[55%] rounded-2xl shadow-2xl gap-3 p-5 bg-midnight-bg border-2 border-midnight-secondary">
+    <div class="flex flex-col justify-evenly w-[75%] h-[90%] p-5 rounded-lg bg-midnight-container">
       <!--Top Row -->
-      <div class="note-top-row border-4 border-yellow-400">
+      <div class="flex flex-row justify-between w-full pb-4">
         <!--Timestamp-->
         <div class="note-modal-timestamp"></div>
 
@@ -12,7 +12,7 @@
       </div>
 
       <!--Modal Body (Content Area)-->
-      <textarea id="note-modal-body" class="text-center resize-none outline-none bg-midnight-container text-midnight-text"></textarea>
+      <textarea id="note-modal-body" class="text-center w-full h-full border-4 border-purple-400 resize-none outline-none bg-midnight-container text-midnight-text"></textarea>
 
       <!--Actions-->
       <div class="note-bottom-row">
