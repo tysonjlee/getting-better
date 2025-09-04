@@ -675,6 +675,26 @@ video {
   height: 100%;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
+.h-10 {
+  height: 2.5rem;
+}
+
+.h-9 {
+  height: 2.25rem;
+}
+
+.h-\[65\%\] {
+  height: 65%;
+}
+
+.max-h-\[50\%\] {
+  max-height: 50%;
+}
+
 .min-h-52 {
   min-height: 13rem;
 }
@@ -685,6 +705,26 @@ video {
 
 .min-h-\[24px\] {
   min-height: 24px;
+}
+
+.min-h-\[\] {
+  min-height: ;
+}
+
+.min-h-\[50\%\] {
+  min-height: 50%;
+}
+
+.min-h-44 {
+  min-height: 11rem;
+}
+
+.min-h-6 {
+  min-height: 1.5rem;
+}
+
+.min-h-60 {
+  min-height: 15rem;
 }
 
 .w-10 {
@@ -707,12 +747,32 @@ video {
   width: 100%;
 }
 
+.w-8 {
+  width: 2rem;
+}
+
+.w-9 {
+  width: 2.25rem;
+}
+
+.w-\[70\%\] {
+  width: 70%;
+}
+
+.w-\[90\%\] {
+  width: 90%;
+}
+
 .min-w-60 {
   min-width: 15rem;
 }
 
 .min-w-\[400px\] {
   min-width: 400px;
+}
+
+.min-w-\[90\%\] {
+  min-width: 90%;
 }
 
 .max-w-\[85rem\] {
@@ -751,6 +811,10 @@ video {
   flex-wrap: wrap;
 }
 
+.content-start {
+  align-content: flex-start;
+}
+
 .content-evenly {
   align-content: space-evenly;
 }
@@ -761,6 +825,10 @@ video {
 
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-end {
@@ -785,6 +853,14 @@ video {
 
 .gap-5 {
   gap: 1.25rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .gap-x-2 {
@@ -850,6 +926,26 @@ video {
 .border-purple-400 {
   --tw-border-opacity: 1;
   border-color: rgb(192 132 252 / var(--tw-border-opacity, 1));
+}
+
+.border-yellow-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(234 179 8 / var(--tw-border-opacity, 1));
+}
+
+.border-purple-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(168 85 247 / var(--tw-border-opacity, 1));
+}
+
+.border-blue-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity, 1));
+}
+
+.border-teal-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(45 212 191 / var(--tw-border-opacity, 1));
 }
 
 .bg-black {
@@ -962,6 +1058,26 @@ video {
   padding-top: 0.5rem;
 }
 
+.pl-\[1\.5\%\] {
+  padding-left: 1.5%;
+}
+
+.pt-\[1\.5\%\] {
+  padding-top: 1.5%;
+}
+
+.pb-12 {
+  padding-bottom: 3rem;
+}
+
+.pr-10 {
+  padding-right: 2.5rem;
+}
+
+.pr-5 {
+  padding-right: 1.25rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -984,6 +1100,11 @@ video {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .text-gray-800 {
