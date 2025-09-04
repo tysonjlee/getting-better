@@ -175,18 +175,15 @@ function togglePin(id) {
   // If toggling pin on 
   if (!notesById[id].pinned) {
     notesById[id].pinned = true; 
-    localStorage.setItem("notesById", JSON.stringify(notesById)); 
-    notesPinnedByOrder.unshift(id); 
-    localStorage.setItem("notesPinnedByOrder", JSON.stringify(notesPinnedByOrder)); 
-  } 
-
-  // Otherwise if toggling pin off 
-  else {
+    notesPinnedByOrder.unshift(id);
+  } else { // Otherwise if toggling pin off
     notesById[id].pinned = false; 
-    localStorage.setItem("notesById", JSON.stringify(notesById)); 
     notesPinnedByOrder.splice(notesPinnedByOrder.indexOf(id), 1); 
-    localStorage.setItem("notesPinnedByOrder", JSON.stringify(notesPinnedByOrder));     
   }
+
+  // Set local storage 
+  localStorage.setItem("notesById", JSON.stringify(notesById)); 
+  localStorage.setItem("notesPinnedByOrder", JSON.stringify(notesPinnedByOrder)); 
   
   render(window.currentPage); 
 }
