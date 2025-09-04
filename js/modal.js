@@ -229,7 +229,7 @@ export function openNoteModal(id) {
   if (window.App.notesById[id].wasUpdated) timestamp.textContent = "Edited " + window.App.convertTimestamp(window.App.notesById[id].updatedAt); 
   else timestamp.textContent = "Created " + window.App.convertTimestamp(window.App.notesById[id].createdAt);
   
-  const pinStatus = document.getElementById("pin-status"); 
+  const pinStatus = document.getElementById("note-modal-pin-status"); 
   if (!window.App.notesById[id].pinned) { // If not pinned, don't show the pin icon
     pinStatus.classList.add("hidden"); 
   } else pinStatus.classList.remove("hidden"); // Otherwise show it 
@@ -287,14 +287,16 @@ function togglePin(id) {
    * @param id The unique id of the relative note
    * @return nothing (void)
    */
-  
+
   // If toggling pin on 
   if (!window.App.notesById[id].pinned) {
     window.App.notesById[id].pinned = true; 
     window.App.notesPinnedByOrder.unshift(id);
+    document.getElementById("note-modal-pin-status").classList.remove("hidden"); 
   } else { // Otherwise if toggling pin off
     window.App.notesById[id].pinned = false; 
     window.App.notesPinnedByOrder.splice(window.App.notesPinnedByOrder.indexOf(id), 1); 
+    document.getElementById("note-modal-pin-status").classList.add("hidden"); 
   }
 
   // Set local storage 

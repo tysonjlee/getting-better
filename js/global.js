@@ -164,7 +164,7 @@ function createEditSVG() {
   editSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
   editSVG.setAttribute("viewBox", "0 0 32 32");
   editSVG.setAttribute("fill", "currentColor");
-  editSVG.setAttribute("class", "w-6 h-6 text-midnight-text");
+  editSVG.setAttribute("class", "w-10 h-10 text-midnight-text");
 
   // Create the SVG's path
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -187,7 +187,7 @@ function createDeleteSVG() {
   deleteSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
   deleteSVG.setAttribute("viewBox", "0 0 32 32");
   deleteSVG.setAttribute("fill", "currentColor");
-  deleteSVG.setAttribute("class", "w-6 h-6 text-midnight-text");
+  deleteSVG.setAttribute("class", "w-10 h-10 text-midnight-text");
 
   // Create the SVG's path
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -210,7 +210,7 @@ function createRecoverSVG() {
   recoverSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
   recoverSVG.setAttribute("viewBox", "0 0 32 32");
   recoverSVG.setAttribute("fill", "currentColor");
-  recoverSVG.setAttribute("class", "w-6 h-6 text-midnight-text");
+  recoverSVG.setAttribute("class", "w-10 h-10 text-midnight-text");
 
   // Create the SVG's path
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -233,7 +233,7 @@ function createPinButtonSVG() {
   pinSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
   pinSVG.setAttribute("viewBox", "0 0 32 32");
   pinSVG.setAttribute("fill", "currentColor");
-  pinSVG.setAttribute("class", "w-6 h-6 text-midnight-text");
+  pinSVG.setAttribute("class", "w-10 h-10 text-midnight-text");
 
   // Create the SVG's path
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
