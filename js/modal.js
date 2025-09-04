@@ -246,7 +246,7 @@ export function openNoteModal(id) {
     const pinSVG = window.App.createSVG("pin-button"); 
     pinButton.append(pinSVG); 
     pinButton.addEventListener("click", () => {
-      window.App.togglePin(id); 
+      togglePin(id); 
     }); 
     bottomRow.append(pinButton);
 
@@ -255,7 +255,7 @@ export function openNoteModal(id) {
     const deleteSVG = window.App.createSVG("delete"); 
     deleteButton.append(deleteSVG); 
     deleteButton.addEventListener("click", () => {
-      window.App.deleteNote(id); 
+      deleteNote(id); 
     }); 
     bottomRow.append(deleteButton);
 
@@ -274,9 +274,122 @@ export function openNoteModal(id) {
       const recoverSVG = window.App.createSVG("recover"); 
       recoverButton.append(recoverSVG);  
       recoverButton.addEventListener("click", () => {
-        window.App.recoverNote(id); 
+        recoverNote(id); 
       }); 
       bottomRow.append(recoverButton);
     }
 
+}
+
+function togglePin(id) {
+  /** 
+   * @brief Toggles the pin on the specified note
+   * @param id The unique id of the relative note
+   * @return nothing (void)
+   */
+  
+  // If toggling pin on 
+  if (!window.App.notesById[id].pinned) {
+    window.App.notesById[id].pinned = true; 
+    window.App.notesPinnedByOrder.unshift(id);
+  } else { // Otherwise if toggling pin off
+    window.App.notesById[id].pinned = false; 
+    window.App.notesPinnedByOrder.splice(window.App.notesPinnedByOrder.indexOf(id), 1); 
+  }
+
+  // Set local storage 
+  localStorage.setItem("notesById", JSON.stringify(window.App.notesById)); 
+  localStorage.setItem("notesPinnedByOrder", JSON.stringify(window.App.notesPinnedByOrder)); 
+  
+  window.App.render(window.currentPage); 
+}
+
+function deleteNote(id) {
+  /**
+   * @brief Deletes the specified note 
+   * @param id The unique id of the note to delete 
+   * @return nothing (void)
+   */
+
+  const cardToDelete = document.getElementById(`note-${id}`);
+  if (cardToDelete) { // Safe-check to make sure we got a valid element
+    window.App.notesById[id].isDeleted = true; 
+    window.App.notesById[id].deletedAt = Date.now(); 
+    window.App.notesById[id].pinned = false;     
+    localStorage.setItem("notesById", JSON.stringify(window.App.notesById)); 
+
+    window.App.notesByOrder.splice(window.App.notesByOrder.indexOf(id), 1);
+    localStorage.setItem("notesByOrder", JSON.stringify(window.App.notesByOrder)); 
+
+    window.App.notesPinnedByOrder.splice(window.App.notesPinnedByOrder.indexOf(id), 1); 
+    localStorage.setItem("notesPinnedByOrder", JSON.stringify(window.App.notesPinnedByOrder)); 
+
+    window.App.notesDeletedByOrder.unshift(id);               
+    localStorage.setItem("notesDeletedByOrder", JSON.stringify(window.App.notesDeletedByOrder)); 
+
+    cardToDelete.remove();                               
+  }
+}
+
+function recoverNote(id) {
+  /**
+   * @brief Recovers a deleted note 
+   * @note Helper for createNoteCardElement()
+   * @param id The unique id of the note to recover
+   * @return nothing (void)
+   */
+
+  const cardToRecover = document.getElementById(`note-${id}`); 
+  if (cardToRecover) {
+    window.App.notesById[id].isDeleted = false; 
+    window.App.notesById[id].deletedAt = null; 
+    localStorage.setItem("notesById", JSON.stringify(window.App.notesById));
+
+    window.App.notesByOrder.splice(findInsertIndex(id), 0, id); 
+    localStorage.setItem("notesByOrder", JSON.stringify(window.App.notesByOrder)); 
+
+    window.App.notesDeletedByOrder.splice(window.App.notesDeletedByOrder.indexOf(id), 1); 
+    localStorage.setItem("notesDeletedByOrder", JSON.stringify(window.App.notesDeletedByOrder)); 
+    
+    cardToRecover.remove();                               
+  }
+}
+
+function findInsertIndex(id) {
+  /**
+   * @brief Finds the proper placement of id in notesByOrder
+   * @note helper for recoverNote()
+   * @note Same problem as Leetcode's Search Insert Position (https://leetcode.com/problems/search-insert-position/description/)
+   * @note Used GeeksForGeeks solution (https://www.geeksforgeeks.org/dsa/search-insert-position-of-k-in-a-sorted-array/)
+   * @param id The unique id of the note to recover 
+   * @return the correct index to insert into 
+   */
+
+  // Edge case: If notesByOrder is empty, return 0 
+  if (window.App.notesByOrder.length === 0) return 0; 
+
+  // Get note to recover's timestamp 
+  const noteToRecover = window.App.notesById[id]; 
+  const noteToRecoverTimestamp = noteToRecover.lastChangeAt; 
+
+  // Use binary search to find index 
+  /** @note Remember that notesByOrder is by timestamp DESCENDING! */
+  let lo = 0; 
+  let hi = window.App.notesByOrder.length - 1; 
+  while (lo < hi) {
+    // Get middle object's timestamp 
+    let mid = Math.floor(lo + (hi - lo) / 2); 
+    let midNote = window.App.notesById[window.App.notesByOrder[mid]];
+    let midTimestamp = midNote.lastChangeAt; 
+
+    // If mid is less than our timestamp, adjust window left 
+    if (midTimestamp <= noteToRecoverTimestamp) hi = mid; 
+
+    // Otherwise, adjust window right 
+    else lo = mid + 1; 
+  }
+
+  // arr[lo] is the first element <= ourTimestamp
+  if (window.App.notesById[window.App.notesByOrder[lo]].lastChangeAt > noteToRecoverTimestamp) return lo + 1; 
+  else return lo;  
 }
