@@ -235,7 +235,7 @@ export function openNoteModal(id) {
   } else pinStatus.classList.remove("hidden"); // Otherwise show it 
 
   const content = document.getElementById("note-modal-content"); 
-  content.textContent = window.App.notesById[id].content; 
+  content.value = window.App.notesById[id].content; 
 
   const bottomRow = document.getElementById("note-bottom-row")
   bottomRow.innerHTML = ""; // Clear bottom row upon each re-generation of buttons
