@@ -38,6 +38,21 @@ export function setupModalListeners() {
       loadModal("create", {}); 
     }); 
   } 
+
+  // Note modal 
+  const noteModalBackdrop = document.getElementById("note-modal-backdrop"); 
+  if (noteModalBackdrop) {
+    noteModalBackdrop.addEventListener("click", () => {
+      closeModal(noteModalBackdrop); 
+    }); 
+  }
+
+  const noteModalWindow = document.getElementById("note-modal-window"); 
+  if (noteModalWindow) {
+    noteModalWindow.addEventListener("click", (event) => {
+      event.stopPropagation(); 
+    }); 
+  }
 }
 
 export function loadModal(type, options = {}) {
@@ -208,16 +223,6 @@ export function openNoteModal(id) {
   // Show modal backdrop
   const modalBackdrop = document.getElementById("note-modal-backdrop"); 
   modalBackdrop.classList.remove("hidden"); 
-
-  // Add event listener to close modal on outside click
-  // Also add event listener to prevent closing on inside click (inside modal window)
-  modalBackdrop.addEventListener("click", () => {
-    closeModal(modalBackdrop); 
-  });
-  const modalWindow = document.getElementById("note-modal-window"); 
-  modalWindow.addEventListener("click", (event) => {
-    event.stopPropagation(); 
-  }); 
 
   // Populate note modal template
   const timestamp = document.getElementById("note-modal-timestamp"); 

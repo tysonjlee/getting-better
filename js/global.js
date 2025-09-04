@@ -5,10 +5,10 @@ import {
   injectNavBarTemplate
 } from "./navbar.js"; 
 import {
+  injectNoteModalTemplate,
   injectCreateModalTemplate, 
   setupModalListeners,
-  openNoteModal,
-  injectNoteModalTemplate
+  openNoteModal
 } from "./modal.js"; 
 
 // Constants & Variables 
@@ -76,10 +76,15 @@ async function setupPage() {
    * @return nothing (void)
    */
 
+  // Inject templates
   await injectNavBarTemplate(); 
   await injectCreateModalTemplate(); 
   await injectNoteModalTemplate(); 
+
+  // Modal logic
   setupModalListeners(); 
+
+  // Render the page
   render(window.currentPage);   
 }
 

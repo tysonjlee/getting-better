@@ -29,7 +29,7 @@ async function renderDashboard() {
   // Clear the notes container
   const notesContainer = document.getElementById("notes-container-id"); 
   notesContainer.innerHTML = "";
- 
+  
 
   // Show 4 most recent notes
   // Show pinned first 
