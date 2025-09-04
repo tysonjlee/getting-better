@@ -234,7 +234,7 @@ export function openNoteModal(id) {
     pinStatus.classList.add("hidden"); 
   } else pinStatus.classList.remove("hidden"); // Otherwise show it 
 
-  const content = document.getElementById("note-modal-body"); 
+  const content = document.getElementById("note-modal-content"); 
   content.textContent = window.App.notesById[id].content; 
 
   const bottomRow = document.getElementById("note-bottom-row")
@@ -255,18 +255,18 @@ export function openNoteModal(id) {
     const deleteSVG = window.App.createSVG("delete"); 
     deleteButton.append(deleteSVG); 
     deleteButton.addEventListener("click", () => {
-      deleteNote(id); 
+      deleteNote(id, modalBackdrop); 
     }); 
     bottomRow.append(deleteButton);
 
-    const editButton = document.createElement("button"); 
-    editButton.className = "button-icon"; 
-    const editSVG = window.App.createSVG("edit"); 
-    editButton.append(editSVG); 
-    editButton.addEventListener("click", () => {
-      loadModal("edit", {noteId: id});  
+    const confirmButton = document.createElement("button"); 
+    confirmButton.className = "button-icon"; 
+    const confirmSVG = window.App.createSVG("confirm"); 
+    confirmButton.append(confirmSVG); 
+    confirmButton.addEventListener("click", () => {
+      saveEdit(id, modalBackdrop, content.value); 
     }); 
-    bottomRow.append(editButton);
+    bottomRow.append(confirmButton); 
         
   } else { // Otherwise if a deleted note
       const recoverButton = document.createElement("button"); 
@@ -306,10 +306,11 @@ function togglePin(id) {
   window.App.render(window.currentPage); 
 }
 
-function deleteNote(id) {
+function deleteNote(id, modalBackdrop) {
   /**
    * @brief Deletes the specified note 
    * @param id The unique id of the note to delete 
+   * @param modalBackdrop The background to hide after deleting
    * @return nothing (void)
    */
 
@@ -331,6 +332,8 @@ function deleteNote(id) {
 
     cardToDelete.remove();                               
   }
+
+  closeModal(modalBackdrop); 
 }
 
 function recoverNote(id) {

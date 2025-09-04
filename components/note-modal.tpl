@@ -12,7 +12,9 @@
       </div>
 
       <!--Modal Body (Content Area)-->
-      <div id="note-modal-body" class="flex items-center justify-center min-h-60 bg-midnight-container text-2xl text-midnight-text"></div>
+      <div class="flex items-center justify-center min-h-60">
+        <textarea id="note-modal-content" class="w-full h-full text-center resize-none outline-none bg-midnight-container text-2xl text-midnight-text"></textarea>
+      </div>
 
       <!--Actions-->
       <div id="note-bottom-row" class="flex flex-row justify-end">
