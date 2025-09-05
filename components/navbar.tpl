@@ -23,9 +23,6 @@
         <a class="text-midnight-text focus:outline-hidden group transition-all duration-300 ease-in-out" href="./manager.html">
           <span class="text-lg bg-left-bottom bg-gradient-to-r from-midnight-text to-midnight-text bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out inter-medium">Notes Manager</span>
         </a>
-        <a class="text-midnight-text focus:outline-hidden group transition-all duration-300 ease-in-out" href="./deleted.html">
-          <span class=" text-lg bg-left-bottom bg-gradient-to-r from-midnight-text to-midnight-text bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out inter-medium">Deleted Notes</span>
-        </a>
       </div>
     </div>
   </nav>

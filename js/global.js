@@ -57,9 +57,6 @@ async function render(page) {
   } else if (page === "manager"){
     const managerModule = await import("./manager.js"); 
     managerModule.renderManager(); 
-  } else if (page === "deleted") {
-    const deletedModule = await import("./deleted.js"); 
-    deletedModule.renderDeleted(); 
   }
 }
 window.App.render = render; 
