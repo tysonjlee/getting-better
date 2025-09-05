@@ -274,7 +274,7 @@ export function openNoteModal(id) {
       const recoverSVG = window.App.createSVG("recover"); 
       recoverButton.append(recoverSVG);  
       recoverButton.addEventListener("click", () => {
-        recoverNote(id); 
+        recoverNote(id, modalBackdrop); 
       }); 
       bottomRow.append(recoverButton);
     }
@@ -336,11 +336,12 @@ function deleteNote(id, modalBackdrop) {
   closeModal(modalBackdrop); 
 }
 
-function recoverNote(id) {
+function recoverNote(id, modalBackdrop) {
   /**
    * @brief Recovers a deleted note 
    * @note Helper for createNoteCardElement()
    * @param id The unique id of the note to recover
+   * @param modalBackdrop The background to hide after deleting
    * @return nothing (void)
    */
 
@@ -358,6 +359,8 @@ function recoverNote(id) {
     
     cardToRecover.remove();                               
   }
+
+  closeModal(modalBackdrop); 
 }
 
 function findInsertIndex(id) {
