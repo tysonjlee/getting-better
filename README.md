@@ -78,21 +78,21 @@ The documentation below is for my personal use :p
 - User Accounts 
   - User Profile page 
     - User settings page 
-  - Navbar update 
   - Store info (notes, user data, etc.) on backend 
 - Pinned Notes - pin a note to your dashboard 
 - Search Query - search for relative notes by keywords or note content (AI implementation)
 - Note Modal - click on a note to open a detailed view of it 
 - Organization refactor - remove Deleted Notes page & centralize into Notes Manager page
-  - Automatically show all created & edited notes 
-  - Notes sorting/filtering
-    - Filtering: 
-      - By status
-        - Show all notes 
-        - Unedited notes 
-        - Edited notes 
-        - Deleted notes
-        - Only pinned notes
-      - By tags (see noteTags in global.js)
-    - Sorting: 
-      - By time 
+- Notes Manager sorting/filtering
+  - Filtering: 
+    - By status
+      - Show all notes 
+      - Unedited notes 
+      - Edited notes 
+      - Deleted notes
+      - Only pinned notes
+    - By tags (see noteTags in global.js)
+  - Sorting: 
+    - By time 
+- Overall visual & UI/UX refactor 
+  - Transition into framework for component reusability?
